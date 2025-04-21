@@ -69,13 +69,13 @@ const UpcomingProjectsSlider = () => {
                                 alt={item.title}
                                 className="w-full h-[400px] object-cover"
                             />
-                            <div className="absolute top-4 left-4 text-gray-700  text-xl font-semibold drop-shadow">
+                            <div className="absolute top-4 left-4 text-white  text-xl font-semibold drop-shadow">
                                 {item.title}
                             </div>
-                            <div className="absolute top-12 left-4 text-gray-700 text-sm drop-shadow">
+                            <div className="absolute top-12 left-4 text-white text-sm drop-shadow">
                                 {item.location}
                             </div>
-                            <div className="absolute top-4 right-4 text-gray-700 text-right text-sm font-semibold drop-shadow">
+                            <div className="absolute top-4 right-4 text-white text-right text-sm font-semibold drop-shadow">
                                 {item.type}
                                 <div className="text-base font-bold">{item.price}</div>
                             </div>

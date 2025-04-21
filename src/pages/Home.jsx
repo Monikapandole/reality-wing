@@ -10,6 +10,9 @@ import ResidentialSlider from '../components/ResidentialSlider'
 import UpcomingProjectsSlider from '../components/UpcomingProjectsSlider'
 import RentingAdviceTabs from '../components/RentingAdviceTabs'
 import TopCities from '../components/TopCitiesGrid'
+import SellerCarousel from '../components/SellerCard';
+import PopularProperties from '../components/PopularProperties';
+import Footer from '../components/Footer';
 function Home() {
   const slides = [
     {
@@ -121,8 +124,11 @@ function Home() {
       {/* <FlashDeals /> */}
       <ResidentialSlider />
       <UpcomingProjectsSlider />
+      <PopularProperties/>
       <RentingAdviceTabs />
       <TopCities />
+      <SellerCarousel/>
+      <Footer/>
 
     </div>
   )

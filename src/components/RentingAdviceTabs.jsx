@@ -69,8 +69,8 @@ const RentingAdviceTabs = () => {
       </div>
 
       {/* Floating Advice Box */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-20 w-full max-w-6xl p-6 bg-white shadow-lg rounded-xl z-10">
-        <div className="flex flex-col md:flex-row md:justify-between mb-4">
+      <div className="absolute left-[65%] text-left transform -translate-x-1/2 -bottom-20 w-full max-w-6xl p-6 bg-white shadow-lg rounded-xl z-10 border border-gray-200">
+      <div className="flex flex-col md:flex-row md:justify-between mb-4">
           <div>
             <h3 className="text-xl font-bold text-[#031B4E]">
               Best Renting Advice by Our Top Editors

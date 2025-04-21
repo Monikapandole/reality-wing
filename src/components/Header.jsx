@@ -5,22 +5,24 @@ import { motion } from 'framer-motion';
 
 
 const category = [
-
-    { name: "Load More Button", path: "/shop/load-more-button" },
-    { name: "Infinity Scroll", path: "/shop/infinity-scroll" },
-    { name: "Ajax Pagination", path: "/shop/ajax-pagination" },
-    { name: "Supermarket", path: "/shop/supermarket" },
-    { name: "Furniture", path: "/shop/furniture" },
-    { name: "Electronic", path: "/shop/electronic" },
-    { name: "Autopart", path: "/shop/autopart" },
-    { name: "Cosmetic", path: "/shop/cosmetic" },
-    { name: "Furniture", path: "/shop/furniture" },
-    { name: "Electronic", path: "/shop/electronic" },
-    { name: "Autopart", path: "/shop/autopart" },
-    { name: "Cosmetic", path: "/shop/cosmetic" },
-
-
+    { name: "Apartments", path: "/rent/apartments" },
+    { name: "Villas", path: "/rent/villas" },
+    { name: "Studios", path: "/rent/studios" },
+    { name: "Shared Rooms", path: "/rent/shared-rooms" },
+    { name: "PG (Paying Guest)", path: "/rent/pg" },
+    { name: "Hostels", path: "/rent/hostels" },
+    { name: "Co-living Spaces", path: "/rent/co-living" },
+    { name: "Luxury Homes", path: "/rent/luxury-homes" },
+    { name: "Budget Rentals", path: "/rent/budget" },
+    { name: "Short-Term Rentals", path: "/rent/short-term" },
+    { name: "Long-Term Leases", path: "/rent/long-term" },
+    { name: "Pet-Friendly", path: "/rent/pet-friendly" },
+    { name: "Furnished Rentals", path: "/rent/furnished" },
+    { name: "Unfurnished Rentals", path: "/rent/unfurnished" },
+    { name: "Near Public Transport", path: "/rent/public-transport" },
+    { name: "Parking Included", path: "/rent/parking" },
 ];
+
 
 
 
@@ -192,9 +194,14 @@ const Header = () => {
                                 <li className="hover:underline cursor-pointer">iAdvantage</li>
                             </ul>
 
-                            <button className="w-full mt-4 bg-[#D32F2F] hover:bg-[#B71C1C] text-white py-2 rounded-full text-sm font-semibold">
+                            <Link
+                                to="/login"
+                                className="block w-full mt-6 bg-[#D32F2F] hover:bg-[#B71C1C] text-white py-3 rounded-full text-base font-semibold text-center shadow-md transition-all duration-200"
+                            >
                                 Login
-                            </button>
+                            </Link>
+
+
                             <Link
                                 to="/sign-up"
                             >
