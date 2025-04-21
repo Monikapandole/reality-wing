@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function SignUpPage() {
-  const [role, setRole] = useState('buyer');
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10 font-sans text-left">
@@ -23,9 +22,7 @@ function SignUpPage() {
         {/* Right Panel - Signup */}
         <div className="p-8 md:w-1/2">
           <h2 className="text-2xl font-semibold mb-6">Create Your Account</h2>
-
-          {/* Role Selection */}
-          <div className="mb-5">
+          {/* <div className="mb-5">
             <label className="block text-sm font-medium text-gray-700 mb-2">Are you</label>
             <div className="flex gap-4">
               {['buyer', 'agent'].map((r) => (
@@ -40,8 +37,7 @@ function SignUpPage() {
                 </button>
               ))}
             </div>
-          </div>
-
+          </div> */}
           {/* Two Column Grid for Inputs */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>

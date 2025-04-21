@@ -49,7 +49,7 @@ const ResidentialSlider = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 2.8,
+    slidesToShow: 3.3,
     slidesToScroll: 1,
     nextArrow: <CustomArrow direction="right" />,
     prevArrow: <CustomArrow direction="left" />,
@@ -60,7 +60,7 @@ const ResidentialSlider = () => {
       },
       {
         breakpoint: 768,
-        settings: { slidesToShow: 1.2 },
+        settings: { slidesToShow: 1 },
       },
     ],
   };
@@ -86,7 +86,7 @@ const ResidentialSlider = () => {
               <div className="absolute top-2 right-2 text-white text-xl">
                 <FaStar />
               </div>
-              <div className="bg-white rounded-xl p-4 mt-[-2rem] mx-4 relative z-10 shadow-md">
+              <div className="bg-white rounded-xl p-4 mt-[-2rem] mx-4 relative z-10 shadow-md ipad-pro:min-h-[170px] xl:min-h-[80px]">
                 <div className="w-16 h-16 rounded-full overflow-hidden shadow-md absolute -top-10 left-4 border-4 border-white bg-white">
                   <img src={item.logo} alt="logo" className="w-full h-full " />
                 </div>

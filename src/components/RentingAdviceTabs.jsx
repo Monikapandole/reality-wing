@@ -39,7 +39,7 @@ const RentingAdviceTabs = () => {
   const [activeTab, setActiveTab] = useState("News");
 
   return (
-    <div className="relative">
+    <div className="relative pb-[4rem]">
       {/* Top Section */}
       <div className="bg-white rounded-2xl p-6 mt-10 ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -69,7 +69,7 @@ const RentingAdviceTabs = () => {
       </div>
 
       {/* Floating Advice Box */}
-      <div className="absolute left-[65%] text-left transform -translate-x-1/2 -bottom-20 w-full max-w-6xl p-6 bg-white shadow-lg rounded-xl z-10 border border-gray-200">
+      <div className="xl:absolute  relative xl:left-[65%]  text-left xl:transform xl:-translate-x-1/2 xl:bottom-10  w-full xl:max-w-6xl p-6 bg-white shadow-lg rounded-xl z-10 border border-gray-200">
       <div className="flex flex-col md:flex-row md:justify-between mb-4">
           <div>
             <h3 className="text-xl font-bold text-[#031B4E]">
@@ -124,7 +124,7 @@ const RentingAdviceTabs = () => {
       </div>
 
       {/* Push down content below the floating box */}
-      <div className="h-44" />
+      <div className="xl:h-44" />
     </div>
   );
 };

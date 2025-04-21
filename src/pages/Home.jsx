@@ -10,7 +10,7 @@ import ResidentialSlider from '../components/ResidentialSlider'
 import UpcomingProjectsSlider from '../components/UpcomingProjectsSlider'
 import RentingAdviceTabs from '../components/RentingAdviceTabs'
 import TopCities from '../components/TopCitiesGrid'
-import SellerCarousel from '../components/SellerCard';
+// import SellerCarousel from '../components/SellerCard';
 import PopularProperties from '../components/PopularProperties';
 import Footer from '../components/Footer';
 function Home() {
@@ -22,7 +22,7 @@ function Home() {
       subtitle: "2 Bedrooms, 1 Bath",
       tag: "Fully Furnished",
       buttonText: "BOOK NOW",
-      image: asset3, // Replace with actual image
+      image: asset3, 
     },
     {
       bgColor: "#A1C1D1",
@@ -31,7 +31,7 @@ function Home() {
       subtitle: "Perfect for Singles",
       tag: "Available Now",
       buttonText: "EXPLORE",
-      image: asset1, // Replace with actual image
+      image: asset1, 
     },
     {
       bgColor: "#F9C5D1",
@@ -40,13 +40,13 @@ function Home() {
       subtitle: "Private Pool & Ocean View",
       tag: "Weekend Getaway",
       buttonText: "BOOK NOW",
-      image: asset3, // Replace with actual image
+      image: asset3, 
     },
   ];
 
   const settings = {
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 2000,
     speed: 800,
     slidesToShow: 1,
@@ -55,18 +55,18 @@ function Home() {
     dots: false
   };
   return (
-    <div className="w-full bg-white ">
-      <div className="grid grid-cols-1 lg:grid-cols-3">
+    <div className="w-full bg-white overflow-hidden">
+      <div className="grid grid-cols-1 ipad-pro:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3">
         <Slider {...settings} className="w-full col-span-1 lg:col-span-2 ">
           {slides.map((slide, index) => (
             <div key={index}>
               <div
-                className="p-6 flex flex-col justify-center relative h-[32.6rem]"
+                className="p-6 flex flex-col xl:justify-center  md:justify-center justify-start relative h-[32.6rem]"
                 style={{ backgroundColor: slide.bgColor }}
               >
                 <div className="max-w-md space-y-2 z-10">
                   <p className="text-white text-lg">{slide.offer}</p>
-                  <h1 className="text-white text-[40px] font-bold">
+                  <h1 className="text-white xl:text-[40px] md:text-[40px] text-[25px] font-bold">
                     {slide.title}<br />
                     {slide.subtitle}<br />
                     <span className="text-[20px] tracking-widest">{slide.tag}</span>
@@ -78,7 +78,7 @@ function Home() {
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="absolute right-4 bottom-0 max-h-[380px] object-contain"
+                  className="absolute xl:right-4 md:right-4 right-0 bottom-0 max-h-[380px] object-contain"
                 />
               </div>
             </div>
@@ -121,13 +121,12 @@ function Home() {
 
       </div>
       <CategorySlider />
-      {/* <FlashDeals /> */}
+      <TopCities />
       <ResidentialSlider />
       <UpcomingProjectsSlider />
       <PopularProperties/>
       <RentingAdviceTabs />
-      <TopCities />
-      <SellerCarousel/>
+      {/* <SellerCarousel/> */}
       <Footer/>
 
     </div>
