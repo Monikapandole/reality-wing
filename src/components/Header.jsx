@@ -5,23 +5,23 @@ import { motion } from 'framer-motion';
 
 
 const category = [
-    { name: "Apartments", path: "/rent/apartments" },
-    { name: "Villas", path: "/rent/villas" },
-    { name: "Studios", path: "/rent/studios" },
-    { name: "Shared Rooms", path: "/rent/shared-rooms" },
-    { name: "PG (Paying Guest)", path: "/rent/pg" },
-    { name: "Hostels", path: "/rent/hostels" },
-    { name: "Co-living Spaces", path: "/rent/co-living" },
-    { name: "Luxury Homes", path: "/rent/luxury-homes" },
-    { name: "Budget Rentals", path: "/rent/budget" },
-    { name: "Short-Term Rentals", path: "/rent/short-term" },
-    { name: "Long-Term Leases", path: "/rent/long-term" },
-    { name: "Pet-Friendly", path: "/rent/pet-friendly" },
-    { name: "Furnished Rentals", path: "/rent/furnished" },
-    { name: "Unfurnished Rentals", path: "/rent/unfurnished" },
-    { name: "Near Public Transport", path: "/rent/public-transport" },
-    { name: "Parking Included", path: "/rent/parking" },
-];
+    { name: "Apartments", slug: "apartments", tag: "Lowest Price" },
+    { name: "Villas", slug: "villas",  tag: "New Offers" },
+    { name: "Studios", slug: "studios",  tag: "Flat 30% off" },
+    { name: "Shared Rooms", slug: "shared-rooms",  tag: "Flat 30% off" },
+    { name: "PG (Paying Guest)", slug: "pg-paying-guest",  tag: "New" },
+    { name: "Hostels", slug: "hostels",  tag: "new deal" },
+    { name: "Co-living Spaces", slug: "co-living-spaces",  tag: "new deal" },
+    { name: "Luxury Homes", slug: "luxury-homes",  tag: "Exclusive" },
+    { name: "Budget Rentals", slug: "budget-rentals",  tag: "Budget Friendly" },
+    { name: "Short-Term Rentals", slug: "short-term-rentals",  tag: "Flexible Stay" },
+    { name: "Long-Term Leases", slug: "long-term-leases",  tag: "Best Deals" },
+    { name: "Pet-Friendly", slug: "pet-friendly",  tag: "Pets Allowed" },
+    { name: "Furnished Rentals", slug: "furnished-rentals",  tag: "Fully Furnished" },
+    { name: "Unfurnished Rentals", slug: "unfurnished-rentals",  tag: "Customizable" },
+    { name: "Near Public Transport", slug: "near-public-transport",  tag: "Great Connectivity" },
+    { name: "Parking Included", slug: "parking-included",  tag: "Free Parking" },
+  ];
 
 
 
@@ -75,7 +75,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                                 {/* {group.items.map((item) => ( */}
                                 <li key={item.name}>
                                     <Link
-                                        to={item.path}
+                                        to={item.slug}
                                         onClick={() => setOpen('')}
                                         className="text-black hover:text-[#D32F2F] block text-[20px]"
                                     >

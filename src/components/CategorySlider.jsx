@@ -57,15 +57,15 @@ const CategorySlider = () => {
     ],
   };
 
-const handleClick=(slug)=>{
-  navigate(`/category/${slug}`);
+const handleClick=(slug,image)=>{
+  navigate(`/category/${slug}`, { state: { image } });
 }
   return (
     <div className="px-4 md:px-10 py-8">
       <h2 className="text-2xl font-bold mb-6">Explore Our Category</h2>
       <Slider {...settings}>
         {categories.map((cat, index) => (
-          <div key={index} className="px-2 mt-[30px]" onClick={()=>handleClick(cat.slug)}>
+          <div key={index} className="px-2 mt-[30px]" onClick={()=>handleClick(cat.slug,cat.img)}>
             <div className="flex flex-col items-center text-center">
               {cat.tag && (
                 <span className="bg-orange-100 text-sm font-semibold text-gray-700 px-3 py-1 rounded-full mb-2">

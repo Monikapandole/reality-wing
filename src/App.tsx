@@ -8,7 +8,7 @@ import Header from './components/Header';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import CategoryPage from './components/CategoryPage';
-
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
@@ -18,12 +18,14 @@ function App() {
 
         <div className="pt-[80px]"> 
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-           <Route path="/about-us" element={<AboutUs />} />
-           <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/category/:name" element={<CategoryPage />} />
+          
+
+            <Route path="/" element={<><ScrollToTop /><Home /></>} />
+            <Route path="/home" element={<><ScrollToTop /><Home /></>} />
+           <Route path="/about-us" element={<><ScrollToTop /><AboutUs /></>} />
+           <Route path="/sign-up" element={<><ScrollToTop /><SignUpPage /></>} />
+            <Route path="/login" element={<><ScrollToTop /><LoginPage /></>} />
+            <Route path="/category/:name" element={<><ScrollToTop /><CategoryPage /></>} />
 
           </Routes>
         </div>
