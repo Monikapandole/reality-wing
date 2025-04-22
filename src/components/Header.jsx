@@ -1,26 +1,30 @@
 import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-
+import icon1 from "../assets/asset1.jpg";
+import icon2 from "../assets/asset2.jpg";
+import icon3 from "../assets/asset3.jpg";
+import icon4 from "../assets/asset5.jpg";
+import icon5 from "../assets/asset6.jpg";
+import icon6 from "../assets/asset7.jpg";
 
 const category = [
-    { name: "Apartments", slug: "apartments", tag: "Lowest Price" },
-    { name: "Villas", slug: "villas",  tag: "New Offers" },
-    { name: "Studios", slug: "studios",  tag: "Flat 30% off" },
-    { name: "Shared Rooms", slug: "shared-rooms",  tag: "Flat 30% off" },
-    { name: "PG (Paying Guest)", slug: "pg-paying-guest",  tag: "New" },
-    { name: "Hostels", slug: "hostels",  tag: "new deal" },
-    { name: "Co-living Spaces", slug: "co-living-spaces",  tag: "new deal" },
-    { name: "Luxury Homes", slug: "luxury-homes",  tag: "Exclusive" },
-    { name: "Budget Rentals", slug: "budget-rentals",  tag: "Budget Friendly" },
-    { name: "Short-Term Rentals", slug: "short-term-rentals",  tag: "Flexible Stay" },
-    { name: "Long-Term Leases", slug: "long-term-leases",  tag: "Best Deals" },
-    { name: "Pet-Friendly", slug: "pet-friendly",  tag: "Pets Allowed" },
-    { name: "Furnished Rentals", slug: "furnished-rentals",  tag: "Fully Furnished" },
-    { name: "Unfurnished Rentals", slug: "unfurnished-rentals",  tag: "Customizable" },
-    { name: "Near Public Transport", slug: "near-public-transport",  tag: "Great Connectivity" },
-    { name: "Parking Included", slug: "parking-included",  tag: "Free Parking" },
+    { name: "Apartments", slug: "apartments", img: icon1, tag: "Lowest Price" },
+    { name: "Villas", slug: "villas", img: icon2, tag: "New Offers" },
+    { name: "Studios", slug: "studios", img: icon3, tag: "Flat 30% off" },
+    { name: "Shared Rooms", slug: "shared-rooms", img: icon4, tag: "Flat 30% off" },
+    { name: "PG (Paying Guest)", slug: "pg-paying-guest", img: icon1, tag: "New" },
+    { name: "Hostels", slug: "hostels", img: icon5, tag: "new deal" },
+    { name: "Co-living Spaces", slug: "co-living-spaces", img: icon6, tag: "new deal" },
+    { name: "Luxury Homes", slug: "luxury-homes", img: icon1, tag: "Exclusive" },
+    { name: "Budget Rentals", slug: "budget-rentals", img: icon2, tag: "Budget Friendly" },
+    { name: "Short-Term Rentals", slug: "short-term-rentals", img: icon3, tag: "Flexible Stay" },
+    { name: "Long-Term Leases", slug: "long-term-leases", img: icon4, tag: "Best Deals" },
+    { name: "Pet-Friendly", slug: "pet-friendly", img: icon5, tag: "Pets Allowed" },
+    { name: "Furnished Rentals", slug: "furnished-rentals", img: icon6, tag: "Fully Furnished" },
+    { name: "Unfurnished Rentals", slug: "unfurnished-rentals", img: icon1, tag: "Customizable" },
+    { name: "Near Public Transport", slug: "near-public-transport", img: icon2, tag: "Great Connectivity" },
+    { name: "Parking Included", slug: "parking-included", img: icon3, tag: "Free Parking" },
   ];
 
 
@@ -75,7 +79,10 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                                 {/* {group.items.map((item) => ( */}
                                 <li key={item.name}>
                                     <Link
-                                        to={item.slug}
+                                       to={{
+                                        pathname: `/category/${item.slug}`,
+                                        state: { image: item.img }, // Add image to the state
+                                      }}
                                         onClick={() => setOpen('')}
                                         className="text-black hover:text-[#D32F2F] block text-[20px]"
                                     >

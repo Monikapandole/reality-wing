@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -32,7 +32,7 @@ const CityCard = ({ city }) => (
 );
 
 const TopCities = () => {
-  const indoreAreas = [
+  const indoreAreas = useMemo(() => [
     { name: "Vijay Nagar", properties: "5,200+ Properties", image: icon1 },
     { name: "Palasia", properties: "3,800+ Properties", image: icon2 },
     { name: "Bhawarkua", properties: "2,900+ Properties", image: icon3 },
@@ -49,8 +49,7 @@ const TopCities = () => {
     { name: "Navlakha", properties: "1,500+ Properties", image: icon4 },
     { name: "Musakhedi", properties: "1,100+ Properties", image: icon5 },
     { name: "Pipliyahana", properties: "1,750+ Properties", image: icon1 },
-  
-  ];
+  ], []);
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {

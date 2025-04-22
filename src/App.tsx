@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import Home from './pages/Home';
@@ -9,28 +9,30 @@ import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import CategoryPage from './components/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
+import Blog from './pages/Blog';
+import CategoryListPage from './components/CategoryListPage';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <div className="App">
         <Header />
-
-        <div className="pt-[80px]"> 
+        <div className="pt-[80px]">
           <Routes>
-          
-
             <Route path="/" element={<><ScrollToTop /><Home /></>} />
             <Route path="/home" element={<><ScrollToTop /><Home /></>} />
-           <Route path="/about-us" element={<><ScrollToTop /><AboutUs /></>} />
-           <Route path="/sign-up" element={<><ScrollToTop /><SignUpPage /></>} />
+            <Route path="/about-us" element={<><ScrollToTop /><AboutUs /></>} />
+            <Route path="/blog" element={<><ScrollToTop /><Blog /></>} />
+            <Route path="/sign-up" element={<><ScrollToTop /><SignUpPage /></>} />
             <Route path="/login" element={<><ScrollToTop /><LoginPage /></>} />
-            <Route path="/category/:name" element={<><ScrollToTop /><CategoryPage /></>} />
+            {/* Show all categories */}
+            <Route path="/category/:name" element={<CategoryListPage />} />
 
-          </Routes>
+            {/* Show details for an individual item */}
+            <Route path="/category/:name/:id" element={<CategoryPage />} />          </Routes>
         </div>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
