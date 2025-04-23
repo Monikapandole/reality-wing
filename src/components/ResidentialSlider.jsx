@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaStar } from "react-icons/fa";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import icon1 from "../assets/asset1.jpg";
-import icon2 from "../assets/asset2.jpg";
+import icon2 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
 import icon5 from "../assets/asset6.jpg";
 import icon6 from "../assets/asset7.jpg";
@@ -66,7 +66,7 @@ const ResidentialSlider = () => {
   };
 
   return (
-    <div className="py-10 px-4 bg-white px-4 md:px-10 py-8 text-left ">
+    <div className="py-10 px-4 bg-white px-4 md:px-10 py-8 text-left font-rubik">
       <h2 className="text-3xl font-bold text-gray-800 mb-2 pt-10">
         Handpicked Residential Projects
       </h2>

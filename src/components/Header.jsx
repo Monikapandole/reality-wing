@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import icon1 from "../assets/asset1.jpg";
-import icon2 from "../assets/asset2.jpg";
+import icon2 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
 import icon4 from "../assets/asset5.jpg";
 import icon5 from "../assets/asset6.jpg";
@@ -115,7 +115,7 @@ const Header = () => {
     const [hoverTimeout, setHoverTimeout] = useState(null);
 
     return (
-        <header className="content w-full h-[80px] pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-0  flex items-center justify-between z-50 bg-white shadow-lg fixed top-0 left-0 font-inter ">
+        <header className="content w-full h-[80px] pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-0  flex items-center justify-between z-50 bg-white shadow-lg fixed top-0 left-0 font-rubik ">
 
             <div className="flex items-center  " style={{ padding: 'max(16px, 1vw)' }}      >
                 <Link to="/">

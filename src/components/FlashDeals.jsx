@@ -1,6 +1,6 @@
 import React from 'react';
 import asset1 from '../assets/asset1.jpg'
-import asset2 from '../assets/asset2.jpg'
+import asset2 from '../assets/asset1.jpg'
 import asset3 from '../assets/asset3.jpg'
 
 const flashDeals = [

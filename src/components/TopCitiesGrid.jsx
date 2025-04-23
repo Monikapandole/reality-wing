@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaChevronRight } from "react-icons/fa";
 import icon1 from "../assets/delhi.jpeg";
 import icon2 from "../assets/agra.jpeg";
-import icon3 from "../assets/ahemdabaad.jpg";
 import icon4 from "../assets/jaipur-india.jpg";
 import icon5 from "../assets/mumbai.jpg";
 import { FaChevronLeft } from "react-icons/fa";
@@ -35,17 +34,17 @@ const TopCities = () => {
   const indoreAreas = useMemo(() => [
     { name: "Vijay Nagar", properties: "5,200+ Properties", image: icon1 },
     { name: "Palasia", properties: "3,800+ Properties", image: icon2 },
-    { name: "Bhawarkua", properties: "2,900+ Properties", image: icon3 },
+    { name: "Bhawarkua", properties: "2,900+ Properties", image: icon2 },
     { name: "Rau", properties: "1,800+ Properties", image: icon4 },
     { name: "Scheme No. 78", properties: "2,500+ Properties", image: icon5 },
     { name: "Bengali Square", properties: "2,000+ Properties", image: icon1 },
     { name: "MR 10 / MR 11", properties: "1,600+ Properties", image: icon2 },
-    { name: "Khajrana", properties: "1,900+ Properties", image: icon3 },
+    { name: "Khajrana", properties: "1,900+ Properties", image: icon2 },
     { name: "Tilak Nagar", properties: "1,700+ Properties", image: icon4 },
     { name: "Kanadia Road", properties: "2,200+ Properties", image: icon5 },
     { name: "LIG Colony", properties: "1,400+ Properties", image: icon1 },
     { name: "South Tukoganj", properties: "1,600+ Properties", image: icon2 },
-    { name: "Rajendra Nagar", properties: "1,300+ Properties", image: icon3 },
+    { name: "Rajendra Nagar", properties: "1,300+ Properties", image: icon2 },
     { name: "Navlakha", properties: "1,500+ Properties", image: icon4 },
     { name: "Musakhedi", properties: "1,100+ Properties", image: icon5 },
     { name: "Pipliyahana", properties: "1,750+ Properties", image: icon1 },
@@ -70,7 +69,7 @@ const TopCities = () => {
 
   const CustomArrow = ({ onClick, direction }) => (
     <div
-      className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full cursor-pointer ${direction === "left" ? "left-0" : "right-0"
+      className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2  font-rubik rounded-full cursor-pointer ${direction === "left" ? "left-0" : "right-0"
         }`}
       onClick={onClick}
     >

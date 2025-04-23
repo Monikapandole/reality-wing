@@ -3,7 +3,7 @@ import icon4 from "../assets/asset8.jpg";
 import icon5 from "../assets/asset9.jpg";
 import icon6 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
-import heroImage from "../assets/asset2.jpg";
+import heroImage from "../assets/asset1.jpg";
 
 const TABS = ["News", "Tax & Legal", "Help Guides", "Investment"];
 

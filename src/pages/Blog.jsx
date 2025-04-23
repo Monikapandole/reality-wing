@@ -1,14 +1,14 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import icon1 from "../assets/asset1.jpg";
-import icon2 from "../assets/asset2.jpg";
+import icon2 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
 import icon4 from "../assets/asset5.jpg";
 import icon5 from "../assets/asset6.jpg";
 import icon6 from "../assets/asset7.jpg";
 function Blog() {
     return (
-        <div className="bg-gray-50 pb-10">
+        <div className="bg-gray-50 pb- font-rubik ">
             <div className="">
 
                 <section

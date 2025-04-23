@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import PropertyCard from "./PropertyCard";
 import icon1 from "../assets/asset1.jpg";
-import icon2 from "../assets/asset2.jpg";
+import icon2 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
 import icon4 from "../assets/asset5.jpg";
 import icon5 from "../assets/asset6.jpg";

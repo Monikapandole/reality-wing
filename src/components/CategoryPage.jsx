@@ -4,7 +4,7 @@ import { FaRupeeSign } from 'react-icons/fa';
 import { MdOutlineLocationOn, MdOutlineBedroomParent } from 'react-icons/md';
 import { PiArmchairLight } from 'react-icons/pi';
 import { FaCalendarAlt } from 'react-icons/fa';
-import icon2 from "../assets/asset2.jpg";
+import icon2 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
 import icon4 from "../assets/asset5.jpg";
 import icon5 from "../assets/asset6.jpg";

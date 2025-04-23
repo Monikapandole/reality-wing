@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import icon1 from "../assets/asset1.jpg";
-import icon2 from "../assets/asset2.jpg";
+import icon2 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
 import icon4 from "../assets/asset5.jpg";
 import icon5 from "../assets/asset6.jpg";
@@ -61,7 +61,7 @@ const handleClick=(slug,image)=>{
   navigate(`/category/${slug}`, { state: { image } });
 }
   return (
-    <div className="px-4 md:px-10 py-8">
+    <div className="px-4 md:px-10 py-8 font-rubik">
       <h2 className="text-2xl font-bold mb-6">Explore Our Category</h2>
       <Slider {...settings}>
         {categories.map((cat, index) => (

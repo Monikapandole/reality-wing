@@ -10,7 +10,7 @@ module.exports = {
           rubik:['Rubik'],
           chivo:['Chivo'],
           plusJakartaSans:['Plus Jakarta Sans'],
-          inter: ["Inter", "sans-serif"],
+          inter: ["Inter"],
         },
         spacing: {
           '47': '47rem', // Ensure this is correctly defined
