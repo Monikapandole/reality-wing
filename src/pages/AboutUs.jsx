@@ -8,7 +8,7 @@ import aboutUsImage from "../assets/aboutUs-bg.webp";
 
 function AboutUs() {
   return (
-    <div className="bg-white text-gray-800 font-rubik">
+    <div className="bg-white text-gray-800 font-inter">
 
       {/* Hero Section */}
       <section

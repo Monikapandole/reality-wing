@@ -55,7 +55,7 @@ function Home() {
     dots: false
   };
   return (
-    <div className="w-full bg-white overflow-hidden font-rubik">
+    <div className="w-full bg-white overflow-hidden font-inter">
       <div className="grid grid-cols-1 ipad-pro:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3">
         <Slider {...settings} className="w-full col-span-1 lg:col-span-2 ">
           {slides.map((slide, index) => (

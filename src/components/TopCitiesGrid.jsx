@@ -69,7 +69,7 @@ const TopCities = () => {
 
   const CustomArrow = ({ onClick, direction }) => (
     <div
-      className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2  font-rubik rounded-full cursor-pointer ${direction === "left" ? "left-0" : "right-0"
+      className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2  font-inter rounded-full cursor-pointer ${direction === "left" ? "left-0" : "right-0"
         }`}
       onClick={onClick}
     >

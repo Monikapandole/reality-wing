@@ -61,7 +61,7 @@ const handleClick=(slug,image)=>{
   navigate(`/category/${slug}`, { state: { image } });
 }
   return (
-    <div className="px-4 md:px-10 py-8 font-rubik">
+    <div className="px-4 md:px-10 py-8 font-inter">
       <h2 className="text-2xl font-bold mb-6">Explore Our Category</h2>
       <Slider {...settings}>
         {categories.map((cat, index) => (

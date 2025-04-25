@@ -66,7 +66,7 @@ const ResidentialSlider = () => {
   };
 
   return (
-    <div className="py-10 px-4 bg-white px-4 md:px-10 py-8 text-left font-rubik">
+    <div className="py-10 px-4 bg-white px-4 md:px-10 py-8 text-left font-inter">
       <h2 className="text-3xl font-bold text-gray-800 mb-2 pt-10">
         Handpicked Residential Projects
       </h2>

@@ -115,7 +115,7 @@ const Header = () => {
     const [hoverTimeout, setHoverTimeout] = useState(null);
 
     return (
-        <header className="content w-full h-[80px] pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-0  flex items-center justify-between z-50 bg-white shadow-lg fixed top-0 left-0 font-rubik ">
+        <header className="content w-full h-[80px] pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-0  flex items-center justify-between z-50 bg-white shadow-lg fixed top-0 left-0 font-inter ">
 
             <div className="flex items-center  " style={{ padding: 'max(16px, 1vw)' }}      >
                 <Link to="/">

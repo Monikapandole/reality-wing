@@ -8,7 +8,7 @@ import icon5 from "../assets/asset6.jpg";
 import icon6 from "../assets/asset7.jpg";
 function Blog() {
     return (
-        <div className="bg-gray-50 pb- font-rubik ">
+        <div className="bg-gray-50 pb- font-inter ">
             <div className="">
 
                 <section
