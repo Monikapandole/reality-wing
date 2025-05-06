@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { userLogin } from '../Api/services/authService';
 
 function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
+  const {auth ,user} = useSelector(state =>
+   state
+  );  // <-- Correct here
+
+  const handleLogin = async () => {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    console.log(auth, "JWT");
+
+    try {
+      const response = await userLogin(formData, auth.token);  
+      console.log('Login success:', response);
+      // You can save the token to Redux or localStorage
+      // Redirect to the home page after successful login
+    } catch (err) {
+      setError('Invalid email or password');
+      console.error('Login error:', err);
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10 font-inter text-left">
       <div className="bg-white shadow-xl rounded-xl flex flex-col md:flex-row overflow-hidden w-full max-w-4xl">
@@ -20,14 +45,14 @@ function LoginPage() {
         <div className="p-8 md:w-1/2">
           <h2 className="text-2xl font-semibold mb-6">Login to Your Account</h2>
 
-         
-
           {/* Email */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
             <input
               type="email"
               placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
             />
           </div>
@@ -38,9 +63,14 @@ function LoginPage() {
             <input
               type="password"
               placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
             />
           </div>
+
+          {/* Error message */}
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
           {/* Forgot password */}
           <div className="text-right mb-4">
@@ -50,7 +80,10 @@ function LoginPage() {
           </div>
 
           {/* Login button */}
-          <button className="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 rounded-md transition-all">
+          <button
+            onClick={handleLogin}
+            className="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 rounded-md transition-all"
+          >
             Login
           </button>
 
