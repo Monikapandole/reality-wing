@@ -56,19 +56,19 @@ const sliderSettings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 2,
+  slidesToShow: 1,
   slidesToScroll: 1,
   responsive: [
     {
       breakpoint: 640,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 1,
       },
     },
     {
       breakpoint: 768,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 1,
       },
     },
   ],
@@ -88,7 +88,7 @@ const PopularProperties = () => {
       <div className="lg:hidden">
         <Slider {...sliderSettings}>
           {properties.map((prop, index) => (
-            <div key={index} className="pr-4">
+            <div key={index} >
               <PropertyCard {...prop} />
             </div>
           ))}
