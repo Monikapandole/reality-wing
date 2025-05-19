@@ -7,6 +7,8 @@ import icon3 from "../assets/asset3.jpg";
 import icon4 from "../assets/asset5.jpg";
 import icon5 from "../assets/asset6.jpg";
 import icon6 from "../assets/asset7.jpg";
+import { useSelector } from 'react-redux';
+import { PiUserCircleDuotone } from 'react-icons/pi';
 
 const category = [
     { name: "Apartments", slug: "apartments", img: icon1, tag: "Lowest Price" },
@@ -101,6 +103,8 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
 };
 
 const Header = () => {
+      const auth = useSelector((state) => state.auth);
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobileDropdownOpen, setIsDropdownOpen] = useState(false);
     const menuRef = useRef(null);
@@ -123,7 +127,7 @@ const Header = () => {
                 </Link>
             </div>
 
-            {/* Center: Navigation Links */}
+          
             <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex gap-x-8 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 xl:gap-x-[1rem] 2xl:gap-x-8 ipad-pro:gap-x-2 mr-[1.4rem] justify-end h-[80px] items-center">
                 <Link
                     to="/Home"
@@ -154,7 +158,13 @@ const Header = () => {
                     Blog
                 </Link>
                 {/* Login Dropdown */}
-                <div
+               
+                {auth?.token ? (
+        <Link to="/profile">
+          <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
+        </Link>
+      ) : (
+        <div
                     className="relative"
                     onMouseEnter={() => {
                         if (hoverTimeout) clearTimeout(hoverTimeout);
@@ -219,9 +229,10 @@ const Header = () => {
                         </div>
                     </motion.div>
                 </div>
+      )}
 
             </div>
-            {/* Toggle Button for Mobile View */}
+          
             <button
                 ref={buttonRef}
                 className="block md:block ipad-pro:hidden xl:hidden flex items-center"

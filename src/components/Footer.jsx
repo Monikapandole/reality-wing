@@ -54,8 +54,8 @@ const Footer = () => {
       <div className="border-t border-gray-700 mt-10 pt-4 text-left flex  text-sm text-white  px-6 gap-6">
         <p>&copy; 2025 RentHub. All rights reserved.</p>
         <div className=" space-x-4">
-          <a href="/" className="hover:text-white">Privacy Policy</a>
-          <a href="/" className="hover:text-white">Terms of Service</a>
+          <a href="/privacy-policy" className="hover:text-white">Privacy Policy</a>
+          <a href="/terms-and-conditions" className="hover:text-white">Terms of Service</a>
           <a href="/" className="hover:text-white">Help</a>
         </div>
       </div>

@@ -11,6 +11,8 @@ import CategoryPage from './components/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
 import Blog from './pages/Blog';
 import CategoryListPage from './components/CategoryListPage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 function App() {
   return (
@@ -29,7 +31,11 @@ function App() {
             <Route path="/category/:name" element={<CategoryListPage />} />
 
             {/* Show details for an individual item */}
-            <Route path="/category/:name/:id" element={<CategoryPage />} />          </Routes>
+            <Route path="/category/:name/:id" element={<CategoryPage />} />
+            <Route path="/privacy-policy" element={<><ScrollToTop /><PrivacyPolicy /></>} />
+            <Route path="/terms-and-conditions" element={<><ScrollToTop /><TermsAndConditions /></>} />
+          </Routes>
+
         </div>
       </div>
     </BrowserRouter>

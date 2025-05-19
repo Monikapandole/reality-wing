@@ -11,7 +11,7 @@ export const userSignup = async (formData) => {
 
 
 export const userLogin = async (formData, token) => {
-    const response = await axiosInstance.post('/userLogin', formData, {
+    const response = await axiosInstance.post('/login', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Cookie': `token=${token}`, // Set the token in the Cookie header
