@@ -42,6 +42,7 @@ function SignUpPage() {
       console.log(res);
       toast.success('Signup Successful!');
       if (res && res.JWT) {
+        console.log(res , "sign up res")
         const { JWT, user_id } = res;
       dispatch(setUser({ JWT, user: { id: user_id } }));
       navigate('/home');

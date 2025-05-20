@@ -19,13 +19,13 @@ function LoginPage() {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-    console.log(auth, "JWT");
 
     try {
       const response = await userLogin(formData, auth.token);  
       console.log('Login success:', response);
     toast.success('Signup Successful!');
       if (response && response.JWT) {
+        console.log(response ,"response")
         const { JWT, user_id } = response;
       dispatch(setUser({ JWT, user: { id: user_id } }));
       navigate('/home');

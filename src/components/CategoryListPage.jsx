@@ -9,14 +9,14 @@ import icon1 from "../assets/asset1.jpg";
 
 // Sample data (this would come from an API or database in a real app)
 const sampleData = {
-    villas: [
+    'Luxury Home': [
       { id: 1, name: 'Luxury Villa in Beachside', image: icon2, area: 3000, location: 'Vijay Nagar' },
       { id: 2, name: 'Modern Villa in the City', image: icon5, area: 2500, location: 'Rao' },
       { id: 3, name: 'Cozy Villa in Countryside', image: icon4, area: 1500, location: 'Vijay Nagar' },
       { id: 4, name: 'Spacious Villa in Suburb', image: icon3, area: 2000, location: 'Bicholi Mardana' },
       { id: 5, name: 'Elegant Villa in Downtown', image: icon6, area: 2800, location: 'Rao' }
     ],
-    apartments: [
+    'fishing-gear': [
       { id: 1, name: 'Cozy 2BHK Apartment', image: icon6, area: 1200, location: 'Vijay Nagar' },
       { id: 2, name: 'Spacious 3BHK Apartment', image: icon2, area: 1500, location: 'Rao' },
       { id: 3, name: 'Luxury 4BHK Apartment', image: icon5, area: 1800, location: 'Bicholi Mardana' },
@@ -126,7 +126,6 @@ const sampleData = {
 function CategoryListPage() {
   const { name } = useParams(); // The category name (like 'villa', 'apartment')
   const items = sampleData[name] || [];
-
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
 

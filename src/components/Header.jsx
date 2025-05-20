@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import icon1 from "../assets/asset1.jpg";
@@ -10,6 +10,7 @@ import icon6 from "../assets/asset7.jpg";
 import { useDispatch, useSelector } from 'react-redux';
 import { PiUserCircleDuotone } from 'react-icons/pi';
 import { logoutUser } from '../redux/actions/authActions';
+import { fetchCategories } from '../redux/actions/categoryActions';
 
 const category = [
     { name: "Apartments", slug: "apartments", img: icon1, tag: "Lowest Price" },
@@ -36,7 +37,6 @@ const category = [
 
 const Dropdown = ({ title, items, isOpen, setOpen }) => {
     const dropdownRef = useRef(null);
-
     const handleOpen = (newTitle) => {
         setOpen((prev) => (prev === newTitle ? '' : newTitle));
     };
@@ -80,16 +80,16 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                         <div key={index}>
                             <ul className="space-y-2">
                                 {/* {group.items.map((item) => ( */}
-                                <li key={item.name}>
+                                <li key={item.category_name}>
                                     <Link
                                         to={{
                                             pathname: `/category/${item.slug}`,
-                                            state: { image: item.img }, // Add image to the state
+                                            state: { image: item.category_image }, // Add image to the state
                                         }}
                                         onClick={() => setOpen('')}
                                         className="text-black hover:text-[#D32F2F] block text-[20px]"
                                     >
-                                        {item.name}
+                                        {item.category_name}
                                     </Link>
                                 </li>
                                 {/* ))} */}
@@ -107,6 +107,11 @@ const Header = () => {
     const auth = useSelector((state) => state.auth);
 const dispatch = useDispatch();
 const { user, token } = useSelector((state) => state.auth);
+  const categories = useSelector((state) => state.category.categories || []);
+  useEffect(() => {
+    dispatch(fetchCategories());
+    
+  }, [dispatch]);
 
 const handleLogout = () => {
   if (user && token) {
@@ -146,7 +151,7 @@ const handleLogout = () => {
                 </Link>
                 <Dropdown
                     title="Category"
-                    items={category}
+                    items={categories}
                     isOpen={openDropdown === 'Category'}
                     setOpen={setOpenDropdown}
                 />
@@ -192,9 +197,10 @@ const handleLogout = () => {
                             <div className="p-2">
                                 <Link
                                     to="/profile"
-                                    className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800"
+                                    className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
                                 >
-                                   <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
+                                   <PiUserCircleDuotone className="w-6 h-6 text-gray-700" /> 
+                                   <span>{user.id}</span>
                                 </Link>
 
                                 <button
