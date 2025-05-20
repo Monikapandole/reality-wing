@@ -6,9 +6,9 @@ const Footer = () => {
       <div className=" px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* About Section */}
         <div>
-          <h2 className="text-xl font-semibold text-white mb-4">RentHub</h2>
+          <h2 className="text-xl font-semibold text-white mb-4">Reality Wing</h2>
           <p className="text-sm">
-            RentHub helps you find rental properties quickly and easily. Whether you're a tenant or landlord, our platform makes renting effortless.
+            Reality Wing helps you find rental properties quickly and easily. Whether you're a tenant or landlord, our platform makes renting effortless.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="border-t border-gray-700 mt-10 pt-4 text-left flex  text-sm text-white  px-6 gap-6">
-        <p>&copy; 2025 RentHub. All rights reserved.</p>
+        <p>&copy; 2025 Reality Wing. All rights reserved.</p>
         <div className=" space-x-4">
           <a href="/privacy-policy" className="hover:text-white">Privacy Policy</a>
           <a href="/terms-and-conditions" className="hover:text-white">Terms of Service</a>

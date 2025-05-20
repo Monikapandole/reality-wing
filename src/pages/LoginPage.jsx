@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../Api/services/authService';
-import toast from 'react-hot-toast';
 import { setUser } from '../redux/actions/authActions';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ function LoginPage() {
     try {
       const response = await userLogin(formData, auth.token);  
       console.log('Login success:', response);
-    toast.success('Signup Successful!');
+    toast.success('Login Successfully!');
       if (response && response.JWT) {
         console.log(response ,"response")
         const { JWT, user_id } = response;

@@ -25,10 +25,10 @@ console.log(categories ,"categories")
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 6,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 1500,
+    autoplaySpeed: 1000,
     responsive: [
       {
         breakpoint: 1024,
@@ -52,7 +52,7 @@ const handleClick=(slug,image)=>{
     <div className="px-4 md:px-10 py-8 font-inter">
       <h2 className="text-2xl font-bold mb-6">Explore Our Category</h2>
       <Slider {...settings}>
-        {categories.map((cat, index) => (
+        {[...categories,...categories,...categories].map((cat, index) => (
           <div key={index} className="px-2 mt-[30px]" onClick={()=>handleClick(cat.category_name,cat.category_image)}>
             <div className="flex flex-col items-center text-center">
               {cat.slug && (

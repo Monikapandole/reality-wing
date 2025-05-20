@@ -13,10 +13,15 @@ import Blog from './pages/Blog';
 import CategoryListPage from './components/CategoryListPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PropertyListPage from './pages/property';
+import AddPropertyForm from './components/propertyDetails/addPropertyForm';
+import PropertyViewPage from './components/propertyDetails/PropertyViewPage';
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <div className="App">
         <Header />
         <div className="pt-[80px]">
@@ -29,7 +34,10 @@ function App() {
             <Route path="/login" element={<><ScrollToTop /><LoginPage /></>} />
             {/* Show all categories */}
             <Route path="/category/:name" element={<CategoryListPage />} />
-
+            <Route path="//properties-list" element={<PropertyListPage />} />
+            <Route path="/add-property" element={<AddPropertyForm />} />
+            <Route path="/property/:id" element={<PropertyViewPage />} />
+            <Route path="/edit-property/:id" element={<AddPropertyForm />} />
             {/* Show details for an individual item */}
             <Route path="/category/:name/:id" element={<CategoryPage />} />
             <Route path="/privacy-policy" element={<><ScrollToTop /><PrivacyPolicy /></>} />

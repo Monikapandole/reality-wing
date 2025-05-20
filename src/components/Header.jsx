@@ -105,19 +105,19 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
 
 const Header = () => {
     const auth = useSelector((state) => state.auth);
-const dispatch = useDispatch();
-const { user, token } = useSelector((state) => state.auth);
-  const categories = useSelector((state) => state.category.categories || []);
-  useEffect(() => {
-    dispatch(fetchCategories());
-    
-  }, [dispatch]);
+    const dispatch = useDispatch();
+    const { user, token } = useSelector((state) => state.auth);
+    const categories = useSelector((state) => state.category.categories || []);
+    useEffect(() => {
+        dispatch(fetchCategories());
 
-const handleLogout = () => {
-  if (user && token) {
-    dispatch(logoutUser(user.id, token)); // assuming `user.id` exists
-  }
-};
+    }, [dispatch]);
+
+    const handleLogout = () => {
+        if (user && token) {
+            dispatch(logoutUser(user.id, token)); // assuming `user.id` exists
+        }
+    };
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobileDropdownOpen, setIsDropdownOpen] = useState(false);
     const menuRef = useRef(null);
@@ -199,13 +199,19 @@ const handleLogout = () => {
                                     to="/profile"
                                     className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
                                 >
-                                   <PiUserCircleDuotone className="w-6 h-6 text-gray-700" /> 
-                                   <span>{user.id}</span>
+                                    <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
+                                    <span>{user.id}</span>
+                                </Link>
+                                <Link
+                                    to="/properties-list"
+                                    className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
+                                >
+                                    View Properties
                                 </Link>
 
                                 <button
                                     onClick={() => {
-                                       handleLogout()
+                                        handleLogout()
                                     }}
                                     className="block w-full text-left px-4 py-2 hover:bg-red-50 text-sm text-red-600"
                                 >

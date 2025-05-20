@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaRupeeSign } from 'react-icons/fa';
-import { MdOutlineLocationOn, MdOutlineBedroomParent } from 'react-icons/md';
-import { PiArmchairLight } from 'react-icons/pi';
 import { FaCalendarAlt } from 'react-icons/fa';
 import icon2 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
 import icon4 from "../assets/asset5.jpg";
 import icon5 from "../assets/asset6.jpg";
-import icon6 from "../assets/asset7.jpg";
 import icon1 from "../assets/asset1.jpg";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -243,6 +239,15 @@ const sampleData = {
 function CategoryPage() {
   const { name, id } = useParams();
   const item = sampleData[name]?.find((item) => item.id === parseInt(id));
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleRequestClick = () => setShowPopup(true);
+  const handleClosePopup = () => setShowPopup(false);
+  const handleConfirmRequest = () => {
+    // Handle actual request logic here
+    console.log('Property request sent!');
+    setShowPopup(false);
+  };
   if (!item) {
     return <div>Item not found</div>;
   }
@@ -285,6 +290,40 @@ function CategoryPage() {
             </div>
 
             <div className="text-gray-500 text-xs mt-4">Posted by Owner</div>
+            <button
+              onClick={handleRequestClick}
+              className="mt-4 bg-[#D32F2F] text-white text-sm px-4 py-2 rounded hover:bg-[#E57373] transition"
+            >
+              Request For Property
+            </button>
+           {showPopup && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-8 mx-4 text-center">
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+        Do you want to request this property?
+      </h2>
+      <p className="text-base text-gray-600 mb-2">
+        If you proceed, we’ll notify the property owner that you're interested in renting this listing.Your information and interest will be shared securely with the owner.
+      </p>
+      <div className="mt-8 flex justify-center gap-6">
+        <button
+          onClick={handleConfirmRequest}
+          className="px-6 py-3 bg-[#D32F2F] text-white text-sm rounded-lg hover:bg-[#E57373] transition-colors"
+        >
+          Yes, Request
+        </button>
+        <button
+          onClick={handleClosePopup}
+          className="px-6 py-3 bg-gray-200 text-gray-700 text-sm rounded-lg hover:bg-gray-300 transition-colors"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
           </div>
         </div>
 

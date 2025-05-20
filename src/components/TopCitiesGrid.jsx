@@ -93,7 +93,7 @@ const TopCities = () => {
         Top Cities
       </h3>
       <h2 className="xl:text-4xl md:text-4xl text-2xl font-extrabold text-[#0A1431] mb-8">
-        Explore Real Estate in Popular Indian Cities
+        Explore Real Estate in Popular Areas
       </h2>
       <div className="relative">
       <Slider {...settings}>

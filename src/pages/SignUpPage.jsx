@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { toast } from 'react-hot-toast'; // optional, for better UX
 import { userSignup } from '../Api/services/authService';
 import { setUser } from '../redux/actions/authActions';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -21,37 +21,43 @@ function SignUpPage() {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match');
-      return;
+  if (formData.password !== formData.confirmPassword) {
+    toast.error('Passwords do not match');
+    return;
+  }
+
+  const form = new FormData();
+  form.append('name', formData.name);
+  form.append('email', formData.email);
+  form.append('password', formData.password);
+  form.append('country_code', formData.country_code);
+  form.append('phone_number', formData.phone_number);
+  form.append('role', 'user'); // static role = user
+
+  try {
+    const res = await userSignup(form);
+    console.log(res.result)
+    if (res.result && res.result === "Email already exists" ||res.result === 'Mobile Number already exists') {
+      toast.error(res.result);
+      return; 
     }
 
-    const form = new FormData();
-    form.append('name', formData.name);
-    form.append('email', formData.email);
-    form.append('password', formData.password);
-    form.append('country_code', formData.country_code);
-    form.append('phone_number', formData.phone_number);
-    form.append('role', 'user'); // static role = user
-
-    try {
-      const res = await userSignup(form);
-      console.log(res);
-      toast.success('Signup Successful!');
-      if (res && res.JWT) {
-        console.log(res , "sign up res")
-        const { JWT, user_id } = res;
+   
+    if (res && res.JWT) {
+       toast.success('Signup Successful!');
+      const { JWT, user_id } = res;
       dispatch(setUser({ JWT, user: { id: user_id } }));
       navigate('/home');
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error(error?.response?.data?.message || 'Signup Failed');
     }
-  };
+  } catch (error) {
+    console.error(error);
+    toast.error(error?.response?.data?.message || 'Signup Failed');
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10 font-inter text-left">
