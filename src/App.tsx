@@ -34,7 +34,7 @@ function App() {
             <Route path="/login" element={<><ScrollToTop /><LoginPage /></>} />
             {/* Show all categories */}
             <Route path="/category/:name" element={<CategoryListPage />} />
-            <Route path="//properties-list" element={<PropertyListPage />} />
+            <Route path="/properties-list" element={<PropertyListPage />} />
             <Route path="/add-property" element={<AddPropertyForm />} />
             <Route path="/property/:id" element={<PropertyViewPage />} />
             <Route path="/edit-property/:id" element={<AddPropertyForm />} />

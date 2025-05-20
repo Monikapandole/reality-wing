@@ -136,7 +136,7 @@ const AddPropertyForm = () => {
         } else {
             dispatch(addProperty(form));
         }
-        navigate("/properties");
+        navigate("/properties-list");
     };
     console.log(form.bathroomImage instanceof File); // should be true
 
