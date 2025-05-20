@@ -19,3 +19,19 @@ export const userLogin = async (formData, token) => {
     });
     return response.data;
   };
+
+
+// api/auth.js or similar
+export const userLogout = async (userId, token) => {
+  const formData = new FormData();
+  formData.append('user_id', userId);
+
+  const response = await axiosInstance.post('/Logout', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Cookie': `token=${token}`, // Send token in Cookie header
+    },
+  });
+
+  return response.data;
+};

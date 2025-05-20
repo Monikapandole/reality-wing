@@ -11,7 +11,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const CategorySlider = () => {
   const navigate = useNavigate();
-  const { categories, loading, error } = useSelector((state) => state.categories);
+const categories = useSelector((state) => state.category.categories || []);
+const fullState = useSelector((state) => state);
+useEffect(() => {
+  console.log('Full Redux state:', fullState);
+}, [fullState]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

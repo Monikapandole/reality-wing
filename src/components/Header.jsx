@@ -7,8 +7,9 @@ import icon3 from "../assets/asset3.jpg";
 import icon4 from "../assets/asset5.jpg";
 import icon5 from "../assets/asset6.jpg";
 import icon6 from "../assets/asset7.jpg";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PiUserCircleDuotone } from 'react-icons/pi';
+import { logoutUser } from '../redux/actions/authActions';
 
 const category = [
     { name: "Apartments", slug: "apartments", img: icon1, tag: "Lowest Price" },
@@ -27,7 +28,7 @@ const category = [
     { name: "Unfurnished Rentals", slug: "unfurnished-rentals", img: icon1, tag: "Customizable" },
     { name: "Near Public Transport", slug: "near-public-transport", img: icon2, tag: "Great Connectivity" },
     { name: "Parking Included", slug: "parking-included", img: icon3, tag: "Free Parking" },
-  ];
+];
 
 
 
@@ -81,10 +82,10 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                                 {/* {group.items.map((item) => ( */}
                                 <li key={item.name}>
                                     <Link
-                                       to={{
-                                        pathname: `/category/${item.slug}`,
-                                        state: { image: item.img }, // Add image to the state
-                                      }}
+                                        to={{
+                                            pathname: `/category/${item.slug}`,
+                                            state: { image: item.img }, // Add image to the state
+                                        }}
                                         onClick={() => setOpen('')}
                                         className="text-black hover:text-[#D32F2F] block text-[20px]"
                                     >
@@ -103,8 +104,15 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
 };
 
 const Header = () => {
-      const auth = useSelector((state) => state.auth);
+    const auth = useSelector((state) => state.auth);
+const dispatch = useDispatch();
+const { user, token } = useSelector((state) => state.auth);
 
+const handleLogout = () => {
+  if (user && token) {
+    dispatch(logoutUser(user.id, token)); // assuming `user.id` exists
+  }
+};
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobileDropdownOpen, setIsDropdownOpen] = useState(false);
     const menuRef = useRef(null);
@@ -127,7 +135,7 @@ const Header = () => {
                 </Link>
             </div>
 
-          
+
             <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex gap-x-8 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 xl:gap-x-[1rem] 2xl:gap-x-8 ipad-pro:gap-x-2 mr-[1.4rem] justify-end h-[80px] items-center">
                 <Link
                     to="/Home"
@@ -158,81 +166,118 @@ const Header = () => {
                     Blog
                 </Link>
                 {/* Login Dropdown */}
-               
+
                 {auth?.token ? (
-        <Link to="/profile">
-          <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
-        </Link>
-      ) : (
-        <div
-                    className="relative"
-                    onMouseEnter={() => {
-                        if (hoverTimeout) clearTimeout(hoverTimeout);
-                        setOpenDropdown('Login');
-                    }}
-                    onMouseLeave={() => {
-                        const timeout = setTimeout(() => setOpenDropdown(''), 150);
-                        setHoverTimeout(timeout);
-                    }}
-                >
-                    <button
-                        onClick={() => setOpenDropdown(openDropdown === 'Login' ? '' : 'Login')}
-                        className="flex items-center xl:text-lg ipad-pro:text-base md:text-sm text-sm hover:text-[#D32F2F]"
+                    <div
+                        className="relative"
+                        onMouseEnter={() => {
+                            if (hoverTimeout) clearTimeout(hoverTimeout);
+                            setOpenDropdown('Profile');
+                        }}
+                        onMouseLeave={() => {
+                            const timeout = setTimeout(() => setOpenDropdown(''), 150);
+                            setHoverTimeout(timeout);
+                        }}
                     >
-                        Login
-                        <svg
-                            className={`w-4 h-4 ml-1 transform ${openDropdown === 'Login' ? 'rotate-180' : 'rotate-0'}`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
+                        <button className="flex items-center">
+                            <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
+                        </button>
+
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={openDropdown === 'Profile' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            className="absolute right-0 mt-2 w-40 top-[40px] bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
                         >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
+                            <div className="p-2">
+                                <Link
+                                    to="/profile"
+                                    className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800"
+                                >
+                                   <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
+                                </Link>
 
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={openDropdown === 'Login' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        className="absolute right-0 mt-2 w-64  top-[40px]  bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
-
+                                <button
+                                    onClick={() => {
+                                       handleLogout()
+                                    }}
+                                    className="block w-full text-left px-4 py-2 hover:bg-red-50 text-sm text-red-600"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                ) : (
+                    <div
+                        className="relative"
+                        onMouseEnter={() => {
+                            if (hoverTimeout) clearTimeout(hoverTimeout);
+                            setOpenDropdown('Login');
+                        }}
+                        onMouseLeave={() => {
+                            const timeout = setTimeout(() => setOpenDropdown(''), 150);
+                            setHoverTimeout(timeout);
+                        }}
                     >
-                        <div className="p-4">
-                            <h3 className="text-sm font-semibold text-gray-700 border-b pb-2 mb-2">My Activity</h3>
-                            <ul className="space-y-2 text-sm text-gray-800">
-                                <li className="flex justify-between items-center hover:underline cursor-pointer">
-                                    Requested Properties <span className="text-xs bg-yellow-400 text-white px-2 py-0.5 rounded-full">NEW</span>
-                                </li>
-                                <li className="hover:underline cursor-pointer">View Response</li>
-                                <li className="hover:underline cursor-pointer">Manage Properties</li>
-                                <li className="hover:underline cursor-pointer">MagicDiary</li>
-                                <li className="hover:underline cursor-pointer">Manage Alerts</li>
-                                <li className="hover:underline cursor-pointer">iAdvantage</li>
-                            </ul>
-
-                            <Link
-                                to="/login"
-                                className="block w-full mt-6 bg-[#D32F2F] hover:bg-[#B71C1C] text-white py-3 rounded-full text-base font-semibold text-center shadow-md transition-all duration-200"
+                        <button
+                            onClick={() => setOpenDropdown(openDropdown === 'Login' ? '' : 'Login')}
+                            className="flex items-center xl:text-lg ipad-pro:text-base md:text-sm text-sm hover:text-[#D32F2F]"
+                        >
+                            Login
+                            <svg
+                                className={`w-4 h-4 ml-1 transform ${openDropdown === 'Login' ? 'rotate-180' : 'rotate-0'}`}
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
                             >
-                                Login
-                            </Link>
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={openDropdown === 'Login' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            className="absolute right-0 mt-2 w-64  top-[40px]  bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
+
+                        >
+                            <div className="p-4">
+                                <h3 className="text-sm font-semibold text-gray-700 border-b pb-2 mb-2">My Activity</h3>
+                                <ul className="space-y-2 text-sm text-gray-800">
+                                    <li className="flex justify-between items-center hover:underline cursor-pointer">
+                                        Requested Properties <span className="text-xs bg-yellow-400 text-white px-2 py-0.5 rounded-full">NEW</span>
+                                    </li>
+                                    <li className="hover:underline cursor-pointer">View Response</li>
+                                    <li className="hover:underline cursor-pointer">Manage Properties</li>
+                                    <li className="hover:underline cursor-pointer">MagicDiary</li>
+                                    <li className="hover:underline cursor-pointer">Manage Alerts</li>
+                                    <li className="hover:underline cursor-pointer">iAdvantage</li>
+                                </ul>
+
+                                <Link
+                                    to="/login"
+                                    className="block w-full mt-6 bg-[#D32F2F] hover:bg-[#B71C1C] text-white py-3 rounded-full text-base font-semibold text-center shadow-md transition-all duration-200"
+                                >
+                                    Login
+                                </Link>
 
 
-                            <Link
-                                to="/sign-up"
-                            >
-                                <p className="text-xs text-center mt-2">
-                                    New to Magicbricks? <span className="text-red-600 font-semibold cursor-pointer hover:underline">Sign Up</span>
-                                </p>
-                            </Link>
-                        </div>
-                    </motion.div>
-                </div>
-      )}
+                                <Link
+                                    to="/sign-up"
+                                >
+                                    <p className="text-xs text-center mt-2">
+                                        New to Magicbricks? <span className="text-red-600 font-semibold cursor-pointer hover:underline">Sign Up</span>
+                                    </p>
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
 
             </div>
-          
+
             <button
                 ref={buttonRef}
                 className="block md:block ipad-pro:hidden xl:hidden flex items-center"
