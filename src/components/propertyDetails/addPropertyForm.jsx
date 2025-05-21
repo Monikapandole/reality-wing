@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { TextField, Select, MenuItem, Button, Typography, Box, Grid, InputLabel, FormControl } from "@mui/material";
+import { TextField, Select, MenuItem, Button, Typography, Box, InputLabel, FormControl } from "@mui/material";
 import StepIndicator from "../common/StepIndicator";
 import ImageUploader from "../common/ImageUploader";
 import { addProperty, updateProperty } from "../../redux/Slice/propertySlice";
@@ -144,7 +144,7 @@ const AddPropertyForm = () => {
     const errorClass = "text-red-500 text-sm";
 
     return (
-        <div className="p-6 pt-[5rem] max-w-6xl mx-auto justify-center flex flex-col" >
+        <div className="w-full lg:max-w-6xl lg:mx-auto px-4 sm:px-6 md:px-8 pt-16 flex flex-col justify-center">
             <Typography variant="h4" mb={3}>
                 {isEditMode ? "Edit Property Details" : "Add Property Details"}
             </Typography>
