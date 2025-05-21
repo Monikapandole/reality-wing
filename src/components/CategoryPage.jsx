@@ -66,7 +66,7 @@ const sampleData = {
       amenities: ['24/7 Security', 'Parking', 'Gym', 'Children\'s Play Area'],
     },
   ],
-  studios: [
+   'Vijay Nagar': [
     {
       id: 1,
       name: 'Compact Studio in Downtown',
@@ -94,7 +94,7 @@ const sampleData = {
       amenities: ['24/7 Security', 'Parking', 'Gym', 'Air Conditioning'],
     },
   ],
-  sharedRooms: [
+  'All-Property': [
     {
       id: 1,
       name: 'Shared Room in City Center',

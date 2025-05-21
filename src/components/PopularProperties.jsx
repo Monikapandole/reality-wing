@@ -17,6 +17,8 @@ const properties = [
     area: "1000",
     location: "Indrapuri Colony, Indore",
     images: 4,
+    name: 'Luxury Home',
+    id: 1
   },
   {
     image: icon2,
@@ -25,6 +27,8 @@ const properties = [
     area: "4850",
     location: "Nipania, Indore",
     images: 24,
+    name: 'fishing-gear',
+    id: 2
   },
   {
     image: icon3,
@@ -33,6 +37,8 @@ const properties = [
     area: "600",
     location: "Bengali Square, Indore",
     images: 8,
+    name: 'Luxury Home',
+    id: 1
   },
   {
     image: icon4,
@@ -41,6 +47,8 @@ const properties = [
     area: "1000",
     location: "Indore",
     images: 13,
+    name: 'fishing-gear',
+    id: 2
   },
   {
     image: icon5,
@@ -49,6 +57,8 @@ const properties = [
     area: "1000",
     location: "Indore",
     images: 13,
+    name: 'Luxury Home',
+    id: 1
   },
 ];
 
@@ -76,10 +86,10 @@ const sliderSettings = {
 
 const PopularProperties = () => {
   return (
-    <section className="p-6 text-left">
+    <section className="p-6 text-left mb-12">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold">Popular Owner Properties</h2>
-        <a href="/" className="text-red-600 font-semibold hover:underline">
+        <a href={`/category/All-Property` } className="text-red-600 font-semibold hover:underline">
           See all Properties →
         </a>
       </div>

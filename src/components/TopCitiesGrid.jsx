@@ -8,6 +8,7 @@ import icon2 from "../assets/agra.jpeg";
 import icon4 from "../assets/jaipur-india.jpg";
 import icon5 from "../assets/mumbai.jpg";
 import { FaChevronLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 const chunkArray = (arr, size) => {
   const result = [];
   for (let i = 0; i < arr.length; i += size) {
@@ -16,8 +17,9 @@ const chunkArray = (arr, size) => {
   return result;
 };
 
-const CityCard = ({ city }) => (
-  <div className="flex items-center justify-center gap-4">
+const CityCard = ({ city ,navigate }) => (
+  
+  <div className="flex items-center justify-center gap-4"  onClick={() => navigate(`/category/Vijay Nagar`)}>
     <img
       src={city.image}
       alt={city.name}
@@ -31,6 +33,8 @@ const CityCard = ({ city }) => (
 );
 
 const TopCities = () => {
+    const navigate = useNavigate();
+
   const indoreAreas = useMemo(() => [
     { name: "Vijay Nagar", properties: "5,200+ Properties", image: icon1 },
     { name: "Palasia", properties: "3,800+ Properties", image: icon2 },
@@ -103,7 +107,7 @@ const TopCities = () => {
             ${group.length === 8 ? 'md:grid-cols-4 grid-cols-1 ipad-pro:grid-cols-4' : 'grid-cols-1 ipad-pro:grid-cols-2'}
           `}>
             {group.map((city, index) => (
-              <CityCard key={index} city={city} />
+              <CityCard key={index} city={city} navigate={navigate}/>
             ))}
           </div>
         </div>

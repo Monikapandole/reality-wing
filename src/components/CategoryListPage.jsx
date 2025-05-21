@@ -23,19 +23,20 @@ const sampleData = {
       { id: 4, name: 'Affordable 1BHK Apartment', image: icon3, area: 900, location: 'Vijay Nagar' },
       { id: 5, name: 'Penthouse Apartment in the City', image: icon4, area: 3500, location: 'City Center' }
     ],
-    studios: [
-      { id: 1, name: 'Compact Studio in Downtown', image: icon3, area: 500, location: 'Downtown' },
-      { id: 2, name: 'Affordable Studio in the Suburbs', image: icon4, area: 600, location: 'Suburbs' },
-      { id: 3, name: 'Luxury Studio by the Beach', image: icon5, area: 700, location: 'Beachside' },
-      { id: 4, name: 'Cozy Studio in City Center', image: icon2, area: 550, location: 'City Center' },
-      { id: 5, name: 'Modern Studio in Tech Park', image: icon1, area: 600, location: 'Tech Park' }
+    'Vijay Nagar': [
+      { id: 1, name: 'Compact Studio in Downtown Vijay Nagar' , image: icon3, area: 500, location: 'Vijay Nagar' },
+      { id: 2, name: 'Affordable Studio in the Suburbs Vijay Nagar', image: icon4, area: 600, location: 'Vijay Nagar' },
+      { id: 3, name: 'Luxury Studio by the Beach Vijay Nagar', image: icon5, area: 700, location: 'Vijay Nagar' },
+      { id: 4, name: 'Cozy Studio in City Center Vijay Nagar', image: icon2, area: 550, location: 'Vijay Nagar' },
+      { id: 5, name: 'Modern Studio in Tech Park Vijay Nagar', image: icon1, area: 600, location: 'Vijay Nagar' }
     ],
-    'shared-rooms': [
+    'All-Property': [
       { id: 1, name: 'Shared Room in Vijay Nagar', image: icon1, area: 250, location: 'Vijay Nagar' },
       { id: 2, name: 'Affordable Shared Room in Rao', image: icon3, area: 300, location: 'Rao' },
       { id: 3, name: 'Spacious Shared Room in Suburbs', image: icon4, area: 350, location: 'Suburbs' },
       { id: 4, name: 'Shared Room in City Center', image: icon5, area: 280, location: 'City Center' },
-      { id: 5, name: 'Comfortable Shared Room near College', image: icon2, area: 300, location: 'College Road' }
+      { id: 5, name: 'Comfortable Shared Room near College', image: icon2, area: 300, location: 'College Road' },
+      
     ],
     'pg-paying-guest': [
       { id: 1, name: 'PG for Boys in Vijay Nagar', image: icon2, area: 350, location: 'Vijay Nagar' },

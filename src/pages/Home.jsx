@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ResidentialSlider from '../components/ResidentialSlider'
 import UpcomingProjectsSlider from '../components/UpcomingProjectsSlider'
-import RentingAdviceTabs from '../components/RentingAdviceTabs'
+// import RentingAdviceTabs from '../components/RentingAdviceTabs'
 import TopCities from '../components/TopCitiesGrid'
 // import SellerCarousel from '../components/SellerCard';
 import PopularProperties from '../components/PopularProperties';
@@ -125,7 +125,7 @@ function Home() {
       <ResidentialSlider />
       <UpcomingProjectsSlider />
       <PopularProperties/>
-      <RentingAdviceTabs />
+      {/* <RentingAdviceTabs /> */}
       {/* <SellerCarousel/> */}
       <Footer/>
 

@@ -9,35 +9,41 @@ import icon2 from "../assets/asset1.jpg";
 import icon3 from "../assets/asset3.jpg";
 import icon5 from "../assets/asset6.jpg";
 import icon6 from "../assets/asset7.jpg";
+import { useNavigate } from "react-router-dom";
 const properties = [
   {
     title: "Lumbini Elysee",
     subtitle: "3,4 BHK Apartment, Financial District, Hyderabad",
     price: "₹ 2.26 - 4.54 Cr",
     img: icon1,
-    logo:icon1,
+    logo: icon1,
+    name: 'Luxury Home',
+    id: 1
   },
   {
     title: "Rishi Coral Wood Bungalows",
     subtitle: "4,5 BHK Independent House/Villa, Bhopal",
     price: "₹ 1.8 Cr",
     img: icon2,
-    logo:icon6,
+    logo: icon6,
+    name: 'fishing-gear',
+    id: 2
   },
   {
     title: "Ashiana",
     subtitle: "1,2,3 BHK",
     price: "₹ 84.6 Lakh",
     img: icon3,
-    logo:icon5,
+    logo: icon5,
+    name: 'Luxury Home',
+    id: 1
   },
 ];
 
 const CustomArrow = ({ onClick, direction }) => (
   <div
-    className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full cursor-pointer ${
-      direction === "left" ? "left-0" : "right-0"
-    }`}
+    className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full cursor-pointer ${direction === "left" ? "left-0" : "right-0"
+      }`}
     onClick={onClick}
   >
     {direction === "left" ? <FaChevronLeft /> : <FaChevronRight />}
@@ -45,6 +51,8 @@ const CustomArrow = ({ onClick, direction }) => (
 );
 
 const ResidentialSlider = () => {
+    const navigate = useNavigate();
+
   const settings = {
     dots: false,
     infinite: true,
@@ -73,7 +81,7 @@ const ResidentialSlider = () => {
       <p className="text-gray-500 mb-6 pb-10">Featured Residential projects across India</p>
       <Slider {...settings}>
         {properties.map((item, index) => (
-          <div key={index} className="px-2">
+          <div key={index} className="px-2"  onClick={() => navigate(`/category/${item.name}/${item.id}`)}>
             <div className="rounded-xl overflow-hidden shadow-md relative">
               <img
                 src={item.img}

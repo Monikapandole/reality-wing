@@ -33,13 +33,13 @@ function App() {
             <Route path="/sign-up" element={<><ScrollToTop /><SignUpPage /></>} />
             <Route path="/login" element={<><ScrollToTop /><LoginPage /></>} />
             {/* Show all categories */}
-            <Route path="/category/:name" element={<CategoryListPage />} />
-            <Route path="/properties-list" element={<PropertyListPage />} />
-            <Route path="/add-property" element={<AddPropertyForm />} />
-            <Route path="/property/:id" element={<PropertyViewPage />} />
-            <Route path="/edit-property/:id" element={<AddPropertyForm />} />
+            <Route path="/category/:name" element={<><ScrollToTop /><CategoryListPage /></>} />
+            <Route path="/properties-list" element={<><ScrollToTop /><PropertyListPage /></>} />
+            <Route path="/add-property" element={<><ScrollToTop /><AddPropertyForm /></>} />
+            <Route path="/property/:id" element={<><ScrollToTop /><PropertyViewPage /></>} />
+            <Route path="/edit-property/:id" element={<><ScrollToTop /><AddPropertyForm /></>} />
             {/* Show details for an individual item */}
-            <Route path="/category/:name/:id" element={<CategoryPage />} />
+            <Route path="/category/:name/:id" element={<><ScrollToTop /><CategoryPage /></>} />
             <Route path="/privacy-policy" element={<><ScrollToTop /><PrivacyPolicy /></>} />
             <Route path="/terms-and-conditions" element={<><ScrollToTop /><TermsAndConditions /></>} />
           </Routes>
