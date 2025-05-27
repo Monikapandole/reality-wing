@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PiUserCircleDuotone } from 'react-icons/pi';
 import { logoutUser } from '../redux/actions/authActions';
 import { fetchCategories } from '../redux/actions/categoryActions';
+import { FaPhoneAlt, } from "react-icons/fa";
+import Logo from '../assets/applogo.png'
 
 const category = [
     { name: "Apartments", slug: "apartments", img: icon1, tag: "Lowest Price" },
@@ -30,8 +32,6 @@ const category = [
     { name: "Near Public Transport", slug: "near-public-transport", img: icon2, tag: "Great Connectivity" },
     { name: "Parking Included", slug: "parking-included", img: icon3, tag: "Free Parking" },
 ];
-
-
 
 
 
@@ -70,7 +70,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={isOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="absolute bg-white left-10 right-5 top-[80px] rounded-b-[20px] w-[95%] z-50 text-left overflow-hidden"
+                className="absolute bg-white left-10 right-5 top-[120px] rounded-b-[20px] w-[95%] z-50 text-left overflow-hidden"
                 style={{ boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)' }}
                 onMouseLeave={handleMouseLeave}
             >
@@ -132,162 +132,175 @@ const Header = () => {
     const [hoverTimeout, setHoverTimeout] = useState(null);
 
     return (
-        <header className="content w-full h-[80px] pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-0  flex items-center justify-between z-50 bg-white shadow-lg fixed top-0 left-0 font-inter ">
-
-            <div className="flex items-center  " style={{ padding: 'max(16px, 1vw)' }}      >
-                <Link to="/">
-                    APP LOGO
-                </Link>
-            </div>
-
-
-            <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex gap-x-8 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 xl:gap-x-[1rem] 2xl:gap-x-8 ipad-pro:gap-x-2 mr-[1.4rem] justify-end h-[80px] items-center">
-                <Link
-                    to="/Home"
-                    className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm  ${currentPath === "/Home" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
-                    onMouseEnter={() => setOpenDropdown('')}
-                >
-                    Home
-                </Link>
-                <Dropdown
-                    title="Category"
-                    items={categories}
-                    isOpen={openDropdown === 'Category'}
-                    setOpen={setOpenDropdown}
-                />
-
-                <Link
-                    to="/about-us"
-                    className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm   ${currentPath === "/about-us" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
-                    onMouseEnter={() => setOpenDropdown('')}
-                >
-                    About US
-                </Link>
-                <Link
-                    to="/blog"
-                    className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm   ${currentPath === "/blog" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
-                    onMouseEnter={() => setOpenDropdown('')}
-                >
-                    Blog
-                </Link>
-                {/* Login Dropdown */}
-
-                {auth?.token ? (
-                    <div
-                        className="relative"
-                        onMouseEnter={() => {
-                            if (hoverTimeout) clearTimeout(hoverTimeout);
-                            setOpenDropdown('Profile');
-                        }}
-                        onMouseLeave={() => {
-                            const timeout = setTimeout(() => setOpenDropdown(''), 150);
-                            setHoverTimeout(timeout);
-                        }}
-                    >
-                        <button className="flex items-center">
-                            <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
-                        </button>
-
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={openDropdown === 'Profile' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="absolute right-0 mt-2 w-40 top-[40px] bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
-                        >
-                            <div className="p-2">
-                                <Link
-                                    to="/profile"
-                                    className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
-                                >
-                                    <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
-                                    <span>{user.id}</span>
-                                </Link>
-                                <Link
-                                    to="/properties-list"
-                                    className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
-                                >
-                                    View Properties
-                                </Link>
-
-                                <button
-                                    onClick={() => {
-                                        handleLogout()
-                                    }}
-                                    className="block w-full text-left px-4 py-2 hover:bg-red-50 text-sm text-red-600"
-                                >
-                                    Logout
-                                </button>
+        <header className="content w-full h-[120px]     flex items-center justify-between z-50 bg-white shadow-lg fixed  font-inter ">
+            <div className='flex flex-col w-full '>
+                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex items-center justify-between bg-white pt-8 border-b pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-0 ">
+                    <div className="flex items-center space-x-2 w-[30%]">
+                        <img
+                            src={Logo}
+                            alt="Kanthalya Herbals"
+                            className="h-20 "
+                        />
+                        <div className="flex items-center space-x-2 text-sm w-full">
+                            <FaPhoneAlt className="text-lg text-black" />
+                            <div>
+                                <p className="text-gray-600">Contact us 24/7</p>
+                                <p className="font-bold text-black">(+91) 00000 11111</p>
                             </div>
-                        </motion.div>
+                        </div>
                     </div>
-                ) : (
-                    <div
-                        className="relative"
-                        onMouseEnter={() => {
-                            if (hoverTimeout) clearTimeout(hoverTimeout);
-                            setOpenDropdown('Login');
-                        }}
-                        onMouseLeave={() => {
-                            const timeout = setTimeout(() => setOpenDropdown(''), 150);
-                            setHoverTimeout(timeout);
-                        }}
-                    >
-                        <button
-                            onClick={() => setOpenDropdown(openDropdown === 'Login' ? '' : 'Login')}
-                            className="flex items-center xl:text-lg ipad-pro:text-base md:text-sm text-sm hover:text-[#D32F2F]"
-                        >
-                            Login
-                            <svg
-                                className={`w-4 h-4 ml-1 transform ${openDropdown === 'Login' ? 'rotate-180' : 'rotate-0'}`}
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
+                    <div className="flex items-center space-x-6">
+                        {auth?.token ? (
+                            <div
+                                className="relative"
+                                onMouseEnter={() => {
+                                    if (hoverTimeout) clearTimeout(hoverTimeout);
+                                    setOpenDropdown('Profile');
+                                }}
+                                onMouseLeave={() => {
+                                    const timeout = setTimeout(() => setOpenDropdown(''), 150);
+                                    setHoverTimeout(timeout);
+                                }}
                             >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
+                                <button className="flex items-center gap-3">
+                                    <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
+                                   <span>Account</span>
+                                </button>
 
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={openDropdown === 'Login' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="absolute right-0 mt-2 w-64  top-[40px]  bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={openDropdown === 'Profile' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                    className="absolute right-0 mt-2 w-40 top-[40px] bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
+                                >
+                                    <div className="p-2">
+                                        <Link
+                                            to="/profile"
+                                            className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
+                                        >
+                                            <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
+                                            <span>{user.id}</span>
+                                        </Link>
+                                        <Link
+                                            to="/properties-list"
+                                            className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
+                                        >
+                                            View Properties
+                                        </Link>
 
-                        >
-                            <div className="p-4">
-                                <h3 className="text-sm font-semibold text-gray-700 border-b pb-2 mb-2">My Activity</h3>
-                                <ul className="space-y-2 text-sm text-gray-800">
-                                    <li className="flex justify-between items-center hover:underline cursor-pointer">
-                                        Requested Properties <span className="text-xs bg-yellow-400 text-white px-2 py-0.5 rounded-full">NEW</span>
-                                    </li>
-                                    <li className="hover:underline cursor-pointer">View Response</li>
-                                    <li className="hover:underline cursor-pointer">Manage Properties</li>
-                                    <li className="hover:underline cursor-pointer">MagicDiary</li>
-                                    <li className="hover:underline cursor-pointer">Manage Alerts</li>
-                                    <li className="hover:underline cursor-pointer">iAdvantage</li>
-                                </ul>
-
-                                <Link
-                                    to="/login"
-                                    className="block w-full mt-6 bg-[#D32F2F] hover:bg-[#B71C1C] text-white py-3 rounded-full text-base font-semibold text-center shadow-md transition-all duration-200"
+                                        <button
+                                            onClick={() => {
+                                                handleLogout()
+                                            }}
+                                            className="block w-full text-left px-4 py-2 hover:bg-red-50 text-sm text-red-600"
+                                        >
+                                            Logout
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        ) : (
+                            <div
+                                className="relative"
+                                onMouseEnter={() => {
+                                    if (hoverTimeout) clearTimeout(hoverTimeout);
+                                    setOpenDropdown('Login');
+                                }}
+                                onMouseLeave={() => {
+                                    const timeout = setTimeout(() => setOpenDropdown(''), 150);
+                                    setHoverTimeout(timeout);
+                                }}
+                            >
+                                <button
+                                    onClick={() => setOpenDropdown(openDropdown === 'Login' ? '' : 'Login')}
+                                    className="flex items-center xl:text-lg ipad-pro:text-base md:text-sm text-sm hover:text-[#D32F2F]"
                                 >
                                     Login
-                                </Link>
+                                    <svg
+                                        className={`w-4 h-4 ml-1 transform ${openDropdown === 'Login' ? 'rotate-180' : 'rotate-0'}`}
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
 
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={openDropdown === 'Login' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                    className="absolute right-0 mt-2 w-64  top-[40px]  bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
 
-                                <Link
-                                    to="/sign-up"
                                 >
-                                    <p className="text-xs text-center mt-2">
-                                        New to Magicbricks? <span className="text-red-600 font-semibold cursor-pointer hover:underline">Sign Up</span>
-                                    </p>
-                                </Link>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
+                                    <div className="p-4">
+                                        <h3 className="text-sm font-semibold text-gray-700 border-b pb-2 mb-2">My Activity</h3>
+                                        <ul className="space-y-2 text-sm text-gray-800">
+                                            <li className="flex justify-between items-center hover:underline cursor-pointer">
+                                                Requested Properties <span className="text-xs bg-yellow-400 text-white px-2 py-0.5 rounded-full">NEW</span>
+                                            </li>
+                                            <li className="hover:underline cursor-pointer">View Response</li>
+                                            <li className="hover:underline cursor-pointer">Manage Properties</li>
+                                            <li className="hover:underline cursor-pointer">MagicDiary</li>
+                                            <li className="hover:underline cursor-pointer">Manage Alerts</li>
+                                            <li className="hover:underline cursor-pointer">iAdvantage</li>
+                                        </ul>
 
+                                        <Link
+                                            to="/login"
+                                            className="block w-full mt-6 bg-[#D32F2F] hover:bg-[#B71C1C] text-white py-3 rounded-full text-base font-semibold text-center shadow-md transition-all duration-200"
+                                        >
+                                            Login
+                                        </Link>
+
+
+                                        <Link
+                                            to="/sign-up"
+                                        >
+                                            <p className="text-xs text-center mt-2">
+                                                New to Magicbricks? <span className="text-red-600 font-semibold cursor-pointer hover:underline">Sign Up</span>
+                                            </p>
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+
+
+                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex gap-x-8 sm:gap-x-2 md:gap-x-3 lg:gap-x-8 xl:gap-x-8 2xl:gap-x-8 ipad-pro:gap-x-2  justify-start pr-0 pb-10 h-[80px] items-center pl-[7%] sm:pl-[40px] md:pl-[30px] xl:pl-[30px] ipad-pro:pl-[20px]  ">
+                    <Link
+                        to="/Home"
+                        className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm  ${currentPath === "/Home" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                        onMouseEnter={() => setOpenDropdown('')}
+                    >
+                        Home
+                    </Link>
+                    <Dropdown
+                        title="Category"
+                        items={categories}
+                        isOpen={openDropdown === 'Category'}
+                        setOpen={setOpenDropdown}
+                    />
+
+                    <Link
+                        to="/about-us"
+                        className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm   ${currentPath === "/about-us" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                        onMouseEnter={() => setOpenDropdown('')}
+                    >
+                        About US
+                    </Link>
+                    <Link
+                        to="/blog"
+                        className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm   ${currentPath === "/blog" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                        onMouseEnter={() => setOpenDropdown('')}
+                    >
+                        Blog
+                    </Link>
+                </div>
             </div>
 
             <button
@@ -311,8 +324,6 @@ const Header = () => {
                     />
                 </svg>
             </button>
-
-            {/* Mobile Navigation Menu */}
             <div
                 ref={menuRef}
                 className={`ipad-pro:hidden xl:hidden absolute top-16 z-50 right-0 w-48 bg-white border border-gray-300 shadow-lg ${isMenuOpen ? "block" : "hidden"

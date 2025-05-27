@@ -33,7 +33,8 @@ const CityCard = ({ city ,navigate }) => (
 );
 
 const TopCities = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(false);
 
   const indoreAreas = useMemo(() => [
     { name: "Vijay Nagar", properties: "5,200+ Properties", image: icon1 },
@@ -44,78 +45,71 @@ const TopCities = () => {
     { name: "Bengali Square", properties: "2,000+ Properties", image: icon1 },
     { name: "MR 10 / MR 11", properties: "1,600+ Properties", image: icon2 },
     { name: "Khajrana", properties: "1,900+ Properties", image: icon2 },
-    { name: "Tilak Nagar", properties: "1,700+ Properties", image: icon4 },
-    { name: "Kanadia Road", properties: "2,200+ Properties", image: icon5 },
-    { name: "LIG Colony", properties: "1,400+ Properties", image: icon1 },
-    { name: "South Tukoganj", properties: "1,600+ Properties", image: icon2 },
-    { name: "Rajendra Nagar", properties: "1,300+ Properties", image: icon2 },
-    { name: "Navlakha", properties: "1,500+ Properties", image: icon4 },
-    { name: "Musakhedi", properties: "1,100+ Properties", image: icon5 },
-    { name: "Pipliyahana", properties: "1,750+ Properties", image: icon1 },
   ], []);
-  const [slides, setSlides] = useState([]);
 
   useEffect(() => {
-    const width = window.innerWidth;
-    let itemsPerSlide = 8;
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Tailwind 'md' breakpoint
+    };
 
-    if (width < 768) {
-      itemsPerSlide = 2;
-    } else if (width < 1024) {
-      itemsPerSlide = 2;
-    }
-
-    const chunks = chunkArray(indoreAreas, itemsPerSlide);
-   
-    setSlides(chunks);
-  }, [indoreAreas]);
-
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize); // Listen for resize
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const CustomArrow = ({ onClick, direction }) => (
     <div
-      className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2  font-inter rounded-full cursor-pointer ${direction === "left" ? "left-0" : "right-0"
+      className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full cursor-pointer ${direction === "left" ? "left-0" : "right-0"
         }`}
       onClick={onClick}
     >
       {direction === "left" ? <FaChevronLeft /> : <FaChevronRight />}
     </div>
   );
+
   const settings = {
     dots: false,
-    infinite: true, // Infinite scroll
+    infinite: true,
     speed: 500,
-    slidesToShow: 1, // Only 1 slide at a time
+    slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <CustomArrow direction="right" />,
     prevArrow: <CustomArrow direction="left" />,
-   
   };
 
+  const mobileChunks = chunkArray(indoreAreas, 2); // 4 cities per slide (2 rows of 2)
+
   return (
-    <section className="py-10 px-4 bg-white px-4 md:px-10 py-8 pt-[4rem] text-left">
-      <h3 className="text-gray-500 font-semibold text-sm uppercase mb-2">
-        Top Cities
-      </h3>
+    <section className="py-10 px-4 bg-white md:px-10 pt-[4rem] text-left">
+      <h3 className="text-gray-500 font-semibold text-sm uppercase mb-2">Top Cities</h3>
       <h2 className="xl:text-4xl md:text-4xl text-2xl font-extrabold text-[#0A1431] mb-8">
         Explore Real Estate in Popular Areas
       </h2>
-      <div className="relative">
-      <Slider {...settings}>
-      {slides.map((group, idx) => (
-        <div key={idx} className="px-2">
-          <div className={`grid gap-4
-            ${group.length === 8 ? 'md:grid-cols-4 grid-cols-1 ipad-pro:grid-cols-4' : 'grid-cols-1 ipad-pro:grid-cols-2'}
-          `}>
-            {group.map((city, index) => (
-              <CityCard key={index} city={city} navigate={navigate}/>
+
+      {isMobile ? (
+        <div className="relative">
+          <Slider {...settings}>
+            {mobileChunks.map((group, idx) => (
+              <div key={idx} className="px-2">
+                <div className="grid grid-cols-1 gap-4">
+                  {group.map((city, index) => (
+                    <CityCard key={index} city={city} navigate={navigate} />
+                  ))}
+                </div>
+              </div>
             ))}
-          </div>
+          </Slider>
         </div>
-      ))}
-    </Slider>
-      </div>
+      ) : (
+        <div className="grid grid-cols-4 gap-4">
+          {indoreAreas.map((city, index) => (
+            <CityCard key={index} city={city} navigate={navigate} />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
+
 
 export default TopCities;

@@ -13,7 +13,7 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-        <div>
+        <div >
           <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="/" className="hover:text-white">Home</a></li>
@@ -25,13 +25,21 @@ const Footer = () => {
 
         {/* Popular Cities */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4">Popular Cities</h3>
+          <h3 className="text-lg font-semibold text-white mb-4  ml-10">Popular Areas</h3>
+          <div className=' flex flex-row gap-8'>
           <ul className="space-y-2 text-sm">
-            <li><a href="/" className="hover:text-white">New Delhi</a></li>
-            <li><a href="/" className="hover:text-white">Mumbai</a></li>
-            <li><a href="/" className="hover:text-white">Bangalore</a></li>
-            <li><a href="/" className="hover:text-white">Pune</a></li>
+            <li><a href="/" className="hover:text-white">Vijay Nagar</a></li>
+            <li><a href="/" className="hover:text-white">Palasia</a></li>
+            <li><a href="/" className="hover:text-white">Bhawarkua</a></li>
+            <li><a href="/" className="hover:text-white">Rau</a></li>
           </ul>
+          <ul className="space-y-2 text-sm">
+            <li><a href="/" className="hover:text-white">Scheme No. 78</a></li>
+            <li><a href="/" className="hover:text-white">Bengali Square</a></li>
+            <li><a href="/" className="hover:text-white">MR 10 / MR 11</a></li>
+            <li><a href="/" className="hover:text-white">Khajrana</a></li>
+          </ul>
+          </div>
         </div>
 
         {/* App Download & Social */}
