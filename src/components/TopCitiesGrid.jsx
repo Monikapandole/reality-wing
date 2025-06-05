@@ -9,6 +9,8 @@ import icon4 from "../assets/jaipur-india.jpg";
 import icon5 from "../assets/mumbai.jpg";
 import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAreas } from "../redux/actions/areaAction";
 const chunkArray = (arr, size) => {
   const result = [];
   for (let i = 0; i < arr.length; i += size) {
@@ -35,7 +37,16 @@ const CityCard = ({ city ,navigate }) => (
 const TopCities = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
+const areas = useSelector((state) => state.area.areas || []);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchAreas());
+    
+  }, [dispatch]);
+  useEffect(()=>{
+console.log(areas ,"areas on use")
+  },[areas])
   const indoreAreas = useMemo(() => [
     { name: "Vijay Nagar", properties: "5,200+ Properties", image: icon1 },
     { name: "Palasia", properties: "3,800+ Properties", image: icon2 },

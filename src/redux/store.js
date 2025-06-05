@@ -6,6 +6,7 @@ import { combineReducers } from 'redux';
 import authReducer from './reducers/authReducer';
 import categoryReducer from './reducers/categoryReducer';
 import propertyReducer from './Slice/propertySlice';
+import areasReducer from './reducers/areasReducer';
 
 const persistConfig = {
   key: 'root',
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   category: categoryReducer, 
   property: propertyReducer,
+  area:areasReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
