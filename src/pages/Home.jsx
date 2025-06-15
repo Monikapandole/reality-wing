@@ -31,7 +31,7 @@ function Home() {
       subtitle: "Perfect for Singles",
       tag: "Available Now",
       buttonText: "EXPLORE",
-      image: asset1, 
+      image: asset3, 
     },
     {
       bgColor: "#F9C5D1",
@@ -61,7 +61,7 @@ function Home() {
           {slides.map((slide, index) => (
             <div key={index}>
               <div
-                className="p-6 flex flex-col xl:justify-center  md:justify-center justify-start relative h-[32.6rem]"
+                className="p-6 flex flex-col xl:justify-center text-left  md:justify-center justify-start relative h-[32.6rem]"
                 style={{ backgroundColor: slide.bgColor }}
               >
                 <div className="max-w-md space-y-2 z-10">
@@ -78,7 +78,7 @@ function Home() {
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="absolute xl:right-4 md:right-4 right-0 bottom-0 max-h-[380px] object-contain"
+                  className="absolute xl:right-4 md:right-4 right-0 bottom-0 max-h-[350px] object-contain"
                 />
               </div>
             </div>

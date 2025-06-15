@@ -17,7 +17,7 @@ const properties = [
     price: "₹ 2.26 - 4.54 Cr",
     img: icon1,
     logo: icon1,
-    name: 'Luxury Home',
+    name: 'Houses',
     id: 1
   },
   {
@@ -35,7 +35,7 @@ const properties = [
     price: "₹ 84.6 Lakh",
     img: icon3,
     logo: icon5,
-    name: 'Luxury Home',
+    name: 'Houses',
     id: 1
   },
 ];
@@ -82,11 +82,11 @@ const ResidentialSlider = () => {
       <Slider {...settings}>
         {properties.map((item, index) => (
           <div key={index} className="px-2"  onClick={() => navigate(`/category/${item.name}/${item.id}`)}>
-            <div className="rounded-xl overflow-hidden shadow-md relative">
+            <div className="rounded-xl overflow-hidden shadow-md relative h-[280px] sm:h-[300px] md:h-[330px] lg:h-[350px]">
               <img
                 src={item.img}
                 alt={item.title}
-                className="w-full h-64 object-cover"
+                className="w-full h-48 sm:h-52 md:h-56 lg:h-64 object-cover"
               />
               <div className="absolute top-2 left-2 bg-purple-700 text-white text-xs font-semibold px-2 py-1 rounded">
                 Featured
@@ -94,14 +94,16 @@ const ResidentialSlider = () => {
               <div className="absolute top-2 right-2 text-white text-xl">
                 <FaStar />
               </div>
-              <div className="bg-white rounded-xl p-4 mt-[-2rem] mx-4 relative z-10 shadow-md ipad-pro:min-h-[170px] xl:min-h-[80px]">
-                <div className="w-16 h-16 rounded-full overflow-hidden shadow-md absolute -top-10 left-4 border-4 border-white bg-white">
-                  <img src={item.logo} alt="logo" className="w-full h-full " />
+              <div className="bg-white rounded-xl p-3 sm:p-4 mt-[-1.5rem] sm:mt-[-2rem] mx-3 sm:mx-4 relative z-10 shadow-md h-[140px] sm:h-[150px] md:h-[160px] lg:h-[180px]">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shadow-md absolute -top-8 sm:-top-10 left-3 sm:left-4 border-4 border-white bg-white">
+                  <img src={item.logo} alt="logo" className="w-full h-full" />
                 </div>
-                <div className="pl-20">
-                  <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-                  <p className="text-sm text-gray-500 mt-1">{item.subtitle}</p>
-                  <p className="text-base font-bold text-indigo-700 mt-2">{item.price}</p>
+                <div className="pl-16 sm:pl-20 h-full flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 line-clamp-1">{item.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-500 mt-1 line-clamp-2">{item.subtitle}</p>
+                  </div>
+                  <p className="text-sm sm:text-base font-bold text-indigo-700 mt-2">{item.price}</p>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ import icon1 from "../assets/asset1.jpg";
 
 // Sample data (this would come from an API or database in a real app)
 const sampleData = {
-    'Luxury Home': [
+    'Houses': [
       { id: 1, name: 'Luxury Villa in Beachside', image: icon2, area: 3000, location: 'Vijay Nagar' },
       { id: 2, name: 'Modern Villa in the City', image: icon5, area: 2500, location: 'Rao' },
       { id: 3, name: 'Cozy Villa in Countryside', image: icon4, area: 1500, location: 'Vijay Nagar' },
@@ -141,7 +141,7 @@ function CategoryListPage() {
   const locationOptions = ['Vijay Nagar', 'Rao', 'Bicholi Mardana', 'City Center', 'Beachside'];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-6 pt-[100px]">
       <div className="px-8 bg-white shadow-md rounded-2xl overflow-hidden">
         <h1 className="text-3xl font-semibold text-gray-800">{name.toUpperCase()}</h1>
         

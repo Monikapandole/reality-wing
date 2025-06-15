@@ -19,17 +19,19 @@ const chunkArray = (arr, size) => {
   return result;
 };
 
-const CityCard = ({ city ,navigate }) => (
-  
-  <div className="flex items-center justify-center gap-4"  onClick={() => navigate(`/category/Vijay Nagar`)}>
+const CityCard = ({ city, navigate }) => (
+  <div 
+    className="flex items-center gap-4 p-4 cursor-pointer hover:bg-gray-100 rounded-lg transition-colors h-[120px]" 
+    onClick={() => navigate(`/category/Vijay Nagar`)}
+  >
     <img
       src={city.image}
       alt={city.name}
-      className="rounded-lg w-24 h-24 object-cover"
+      className="rounded-lg w-24 h-24 object-cover flex-shrink-0"
     />
-    <div>
-      <h4 className="font-bold text-lg text-[#0A1431]">{city.name}</h4>
-      <p className="text-gray-500 font-medium text-base">{city.properties}</p>
+    <div className="flex flex-col justify-center flex-1 min-h-[80px]">
+      <h4 className="font-bold text-lg text-[#0A1431] line-clamp-1">{city.name}</h4>
+      <p className="text-gray-500 font-medium text-base line-clamp-1">{city.properties}</p>
     </div>
   </div>
 );
@@ -47,16 +49,16 @@ const areas = useSelector((state) => state.area.areas || []);
   useEffect(()=>{
 console.log(areas ,"areas on use")
   },[areas])
-  const indoreAreas = useMemo(() => [
-    { name: "Vijay Nagar", properties: "5,200+ Properties", image: icon1 },
-    { name: "Palasia", properties: "3,800+ Properties", image: icon2 },
-    { name: "Bhawarkua", properties: "2,900+ Properties", image: icon2 },
-    { name: "Rau", properties: "1,800+ Properties", image: icon4 },
-    { name: "Scheme No. 78", properties: "2,500+ Properties", image: icon5 },
-    { name: "Bengali Square", properties: "2,000+ Properties", image: icon1 },
-    { name: "MR 10 / MR 11", properties: "1,600+ Properties", image: icon2 },
-    { name: "Khajrana", properties: "1,900+ Properties", image: icon2 },
-  ], []);
+  // const indoreAreas = useMemo(() => [
+  //   { name: "Vijay Nagar", properties: "5,200+ Properties", image: icon1 },
+  //   { name: "Palasia", properties: "3,800+ Properties", image: icon2 },
+  //   { name: "Bhawarkua", properties: "2,900+ Properties", image: icon2 },
+  //   { name: "Rau", properties: "1,800+ Properties", image: icon4 },
+  //   { name: "Scheme No. 78", properties: "2,500+ Properties", image: icon5 },
+  //   { name: "Bengali Square", properties: "2,000+ Properties", image: icon1 },
+  //   { name: "MR 10 / MR 11", properties: "1,600+ Properties", image: icon2 },
+  //   { name: "Khajrana", properties: "1,900+ Properties", image: icon2 },
+  // ], []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -88,7 +90,7 @@ console.log(areas ,"areas on use")
     prevArrow: <CustomArrow direction="left" />,
   };
 
-  const mobileChunks = chunkArray(indoreAreas, 2); // 4 cities per slide (2 rows of 2)
+  const mobileChunks = chunkArray(areas, 2); // 4 cities per slide (2 rows of 2)
 
   return (
     <section className="py-10 px-4 bg-white md:px-10 pt-[4rem] text-left">
@@ -113,7 +115,7 @@ console.log(areas ,"areas on use")
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-4">
-          {indoreAreas.map((city, index) => (
+          {areas.map((city, index) => (
             <CityCard key={index} city={city} navigate={navigate} />
           ))}
         </div>

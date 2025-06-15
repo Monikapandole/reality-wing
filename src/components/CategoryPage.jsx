@@ -10,7 +10,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 // Sample data (this would come from an API or database in a real app)
 const sampleData = {
-  'Luxury Home': [
+  'Houses': [
     {
       id: 1,
       name: 'Luxury Villa in Beachside',
@@ -253,7 +253,7 @@ function CategoryPage() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen p-4 md:p-8 text-left">
+    <div className="bg-gray-50 min-h-screen pt-[100px] text-left ">
       <div className="max-w-7xl mx-auto bg-white shadow-md rounded-2xl overflow-hidden">
         <div className="md:flex">
           {/* Left: Carousel */}
