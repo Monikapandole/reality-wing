@@ -1,4 +1,4 @@
-import React , { useEffect }  from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,16 +11,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const CategorySlider = () => {
   const navigate = useNavigate();
-const categories = useSelector((state) => state.category.categories || []);
+  const categories = useSelector((state) => state?.categories?.categories || []);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCategories());
-    
+
   }, [dispatch]);
-  useEffect(()=>{
-console.log(categories ,"categories")
-  },[categories])
+  useEffect(() => {
+    console.log(categories, "categories")
+  }, [categories])
   const settings = {
     dots: false,
     infinite: true,
@@ -45,31 +45,31 @@ console.log(categories ,"categories")
     ],
   };
 
-const handleClick=(slug,image)=>{
-  navigate(`/category/${slug}`, { state: { image } });
-}
+  const handleClick = (slug, image) => {
+    navigate(`/category/${slug}`, { state: { image } });
+  }
   return (
     <div className="px-4 md:px-10 py-8 font-inter">
       <h2 className="text-2xl font-bold mb-6">Explore Our Category</h2>
       <Slider {...settings}>
-        {[...categories,...categories,...categories].map((cat, index) => (
-          <div key={index} className="px-2 mt-[30px]" onClick={()=>handleClick(cat.category_name,cat.category_image)}>
+        {[...categories, ...categories, ...categories].map((cat, index) => (
+          <div key={index} className="px-2 mt-[30px]" onClick={() => handleClick(cat.category_name, cat.category_image)}>
             <div className="flex flex-col items-center text-center">
               {cat.slug && (
                 <span className="bg-orange-100 text-sm font-semibold text-gray-700 px-3 py-1 rounded-full mb-2">
                   {cat.slug}
                 </span>
               )}
-             <div className="flex flex-col items-center">
-              <div className=" flex items-center justify-center mx-auto">
-                <img
-                  src={cat.category_image}
-                  alt={cat.category_name}
-                  className="w-36 h-36 rounded-full "
-                />
+              <div className="flex flex-col items-center">
+                <div className=" flex items-center justify-center mx-auto">
+                  <img
+                    src={cat.category_image}
+                    alt={cat.category_name}
+                    className="w-36 h-36 rounded-full "
+                  />
+                </div>
+                <p className="text-md font-medium mt-2 text-center">{cat.category_name}</p>
               </div>
-              <p className="text-md font-medium mt-2 text-center">{cat.category_name}</p>
-            </div>
             </div>
           </div>
         ))}

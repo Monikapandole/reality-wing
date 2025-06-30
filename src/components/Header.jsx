@@ -107,7 +107,7 @@ const Header = () => {
     const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const { user, token } = useSelector((state) => state.auth);
-    const categories = useSelector((state) => state.category.categories || []);
+    const categories = useSelector((state) => state?.categories?.categories || []);
     useEffect(() => {
         dispatch(fetchCategories());
 

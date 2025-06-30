@@ -1,70 +1,172 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import { getPropertiesList } from '../../Api/services/propertyServices';
+import { setProperties } from '../../redux/Slice/propertySlice';
+import { useSelector, useDispatch } from 'react-redux';
+import Loader from '../common/Loader';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-const PropertyViewPage = () => {
-    const { id } = useParams();
-    const property = useSelector((state) =>
-        state.property.properties.find((p) => p.id === Number(id))
-    );
+function PropertyViewPage() {
+  const { id } = useParams();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { properties } = useSelector((state) => state.property);
+  const [item, setItem] = useState(location.state?.property?.prop || location.state?.property  || null);
+  const [loading, setLoading] = useState(!item);
+  const [currentImage, setCurrentImage] = useState(0); // for image count
 
-    if (!property) {
-        return <div className="p-6 text-red-500">Property not found.</div>;
+  useEffect(() => {
+            console.log(location.state?.property ,"location.")
+
+    if (item) {
+        console.log(location.state?.property ,"location.state?.property")
+      setLoading(false);
+      return;
     }
 
+    // Optional fetch if not passed from previous screen
+    // const fetchAndSetProperty = async () => {
+    //   setLoading(true);
+    //   try {
+    //     let propertyToSet = null;
+    //     if (properties.length > 0) {
+    //       propertyToSet = properties.find((p) => p.id.toString() === id);
+    //     } else {
+    //       const fetchedProperties = await getPropertiesList();
+    //       if (fetchedProperties) {
+    //         dispatch(setProperties(fetchedProperties));
+    //         propertyToSet = fetchedProperties.find((p) => p.id.toString() === id);
+    //       }
+    //     }
+    //     setItem(propertyToSet);
+    //   } catch (error) {
+    //     console.error("Failed to fetch property details:", error);
+    //     setItem(null);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
+    // fetchAndSetProperty();
+  }, [id, properties, dispatch, item, location.state]);
+
+  if (loading) return <Loader />;
+
+  if (!item) {
     return (
-        <div className="p-6 max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6">Property Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                {/* Left: Scrollable Images */}
-                <div className="md:col-span-2  overflow-y-auto border rounded p-2">
-                    {property.photos && Array.from(property.photos).map((file, idx) => {
-                        const isFile = file instanceof File;
-                        const src = isFile ? URL.createObjectURL(file) : file; // file could be a URL string
-                        return (
-                            <img
-                                key={idx}
-                                src={src}
-                                alt={`photo-${idx}`}
-                                className="w-full mb-4 rounded shadow"
-                            />
-                        );
-                    })}
-
-                </div>
-
-                {/* Right: Sticky Details */}
-                <div className="sticky top-6 self-start bg-white border rounded p-4 shadow-md h-fit">
-                    <h3 className="text-xl font-semibold mb-4">Overview</h3>
-                    <div className="space-y-2 text-sm text-gray-700">
-                        <p><strong>Owner's Name :</strong> {property.owner}</p>
-                        <p><strong>Mobile Number:</strong> {property.mobile}</p>
-                        <p><strong>Property Type :</strong> {property.type}</p>
-                        <p><strong>Address:</strong> {property.address}</p>
-                        <p><strong>Purpose:</strong> {property.purpose}</p>
-                        <p><strong>Furnished:</strong> {property.furnished}</p>
-                        <p><strong>Number of Rooms:</strong> {property.rooms}</p>
-                        <p><strong>Square Footage:</strong> {property.sqft}</p>
-                        {property.bathroomImage && property.bathroomImage[0] && (
-                            <div>
-                                <p><strong>Bathroom Image:</strong></p>
-                                <img
-                                    src={property.bathroomImage[0] instanceof File
-                                        ? URL.createObjectURL(property.bathroomImage[0])
-                                        : property.bathroomImage[0]}
-                                    alt="Bathroom"
-                                    className="w-full mb-4 rounded shadow"
-                                />
-                            </div>
-                        )}
-                        <p><strong>Price:</strong> ₹{property.price}</p>
-                        <p><strong>Description:</strong> {property.description}</p>
-                    </div>
-                </div>
-            </div>
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Property not found</h1>
+          <p>Sorry, the property you are looking for does not exist.</p>
         </div>
+      </div>
     );
-};
+  }
+
+  const formatDate = (isoDate) => {
+    return new Date(isoDate).toLocaleDateString('en-IN', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  const property = {
+    photos: item.property_images || [],
+    owner: item.owner_name || 'N/A',
+    mobile: item.owner_contact || 'N/A',
+    type: item.category_id || 'N/A',
+    address: item.address || 'N/A',
+    location: item.location || 'N/A',
+    purpose: item.purpose || 'N/A',
+    furnished: item.furnished?.replace(/_/g, ' ') || 'N/A',
+    rooms: item.number_of_rooms || 'N/A',
+    sqft: item.square_footage || 'N/A',
+    bathroomImage: item.bathroom_image ? [item.bathroom_image] : [],
+    price: item.price || 'N/A',
+    description: item.additional_detail || 'No description available.',
+    floor: item.floor,
+    amenities: item.amenities,
+    availableFrom: formatDate(item.availability_date),
+  };
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    afterChange: (index) => setCurrentImage(index),
+  };
+
+  return (
+    <div className=" pt-[80px] px-4 flex justify-center">
+      <div className="max-w-6xl w-full bg-white p-6 rounded-lg shadow">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Left: Image Slider with Overlay */}
+          <div className="relative rounded-lg overflow-hidden">
+            <Slider {...sliderSettings}>
+              {property.photos.map((photo, idx) => (
+                <div key={idx}>
+                  <img
+                    src={photo}
+                    alt={`photo-${idx}`}
+                    className="w-full h-[350px] object-cover rounded"
+                  />
+                </div>
+              ))}
+            </Slider>
+
+            {/* Image Count Overlay */}
+            <div className="absolute top-2 right-4 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+              {currentImage + 1} of {property.photos.length}
+            </div>
+          </div>
+
+          {/* Right: Property Details */}
+          <div className="space-y-2 text-left">
+            <h2 className="text-2xl font-bold text-gray-800">
+              ₹{property.price}/month
+            </h2>
+            <p className="text-gray-600">
+              {property.rooms} Bedrooms • {property.bathroomImage?.length || 0} Bathrooms
+            </p>
+            <p className="text-gray-600">📍 {property.address}, {property.location}</p>
+
+            <div className="text-sm text-gray-700 mt-4 space-y-1">
+              <p><strong>Square Footage:</strong> {property.sqft} sq.ft.</p>
+              <p><strong>Furnishing:</strong> {property.furnished}</p>
+              <p><strong>Purpose:</strong> {property.purpose}</p>
+              <p><strong>Available From:</strong> {property.availableFrom}</p>
+              <p><strong>Amenities:</strong> {property.amenities}</p>
+              <p><strong>Floor:</strong> {property.floor}</p>
+              <p><strong>Description:</strong> {property.description}</p>
+            </div>
+
+            <p className="text-sm text-gray-500 mt-4">Posted by Owner</p>
+
+            <button className="bg-red-600 text-white px-4 py-2 rounded mt-2 hover:bg-red-700">
+              Request For Property
+            </button>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <hr className="my-6" />
+
+        {/* Bottom Property Meta Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-700">
+          <p><strong>Owner:</strong> {property.owner}</p>
+          <p><strong>Contact:</strong> {property.mobile}</p>
+          <p><strong>Location:</strong> {property.location}</p>
+          <p><strong>Category ID:</strong> {property.type}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default PropertyViewPage;

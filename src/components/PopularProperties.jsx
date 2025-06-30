@@ -1,66 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import PropertyCard from "./PropertyCard";
-import icon1 from "../assets/asset1.jpg";
-import icon2 from "../assets/asset1.jpg";
-import icon3 from "../assets/asset3.jpg";
-import icon4 from "../assets/asset5.jpg";
-import icon5 from "../assets/asset6.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-const properties = [
-  {
-    image: icon1,
-    bhk: "1 BHK Flat",
-    price: "7,000",
-    area: "1000",
-    location: "Indrapuri Colony, Indore",
-    images: 4,
-    name: 'Luxury Home',
-    id: 1
-  },
-  {
-    image: icon2,
-    bhk: "5 BHK Flat",
-    price: "1.3 Lac",
-    area: "4850",
-    location: "Nipania, Indore",
-    images: 24,
-    name: 'fishing-gear',
-    id: 2
-  },
-  {
-    image: icon3,
-    bhk: "1 BHK Flat",
-    price: "16,500",
-    area: "600",
-    location: "Bengali Square, Indore",
-    images: 8,
-    name: 'Luxury Home',
-    id: 1
-  },
-  {
-    image: icon4,
-    bhk: "2 BHK Flat",
-    price: "15,000",
-    area: "1000",
-    location: "Indore",
-    images: 13,
-    name: 'fishing-gear',
-    id: 2
-  },
-  {
-    image: icon5,
-    bhk: "2 BHK Flat",
-    price: "15,000",
-    area: "1000",
-    location: "Indore",
-    images: 13,
-    name: 'Luxury Home',
-    id: 1
-  },
-];
+import { getPropertiesList } from "../Api/services/propertyServices";
+import { fetchCategories } from "../redux/actions/categoryActions";
+import { setProperties as setReduxProperties } from "../redux/Slice/propertySlice";
 
 const sliderSettings = {
   dots: false,
@@ -90,22 +36,61 @@ const sliderSettings = {
 };
 
 const PopularProperties = () => {
+  const [properties, setProperties] = useState([]);
+  const dispatch = useDispatch();
+  const { categories, loading: categoriesLoading } = useSelector((state) => state.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      if (!categoriesLoading && categories.length > 0) {
+        try {
+          const propertiesData = await getPropertiesList();
+          if (propertiesData) {
+            dispatch(setReduxProperties(propertiesData));
+            setProperties(propertiesData);
+          }
+        } catch (error) {
+          console.error("Failed to fetch properties:", error);
+        }
+      }
+    };
+
+    fetchProperties();
+  }, [categories, categoriesLoading, dispatch]);
+
   return (
     <section className="p-6 text-left mb-12">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold">Popular Owner Properties</h2>
-        <a href={`/category/All-Property` } className="text-red-600 font-semibold hover:underline">
+        <a href={`/category/All-Property`} className="text-red-600 font-semibold hover:underline">
           See all Properties →
         </a>
       </div>
 
       <div >
         <Slider {...sliderSettings}>
-          {properties.map((prop, index) => (
-            <div key={index} >
-              <PropertyCard {...prop} />
-            </div>
-          ))}
+          {properties.map((prop, index) => {
+            const category = categories.find((c) => c.id === prop.category_id);
+            const formattedProp = {
+              id: prop.id,
+              image: prop.property_images && prop.property_images.length > 0 ? prop.property_images[0] : "default-image-url.jpg",
+              bhk: `${prop.number_of_rooms} BHK Flat`,
+              price: prop.rent_amount,
+              area: prop.area_sqft,
+              location: prop.address,
+              images: prop.property_images ? prop.property_images.length : 0,
+              name: category ? category.category_name : "Uncategorized",
+            };
+            return (
+              <div key={index} >
+                <PropertyCard {...formattedProp} prop={prop} />
+              </div>
+            );
+          })}
         </Slider>
       </div>
     </section>

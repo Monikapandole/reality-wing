@@ -10,35 +10,8 @@ import icon3 from "../assets/asset3.jpg";
 import icon5 from "../assets/asset6.jpg";
 import icon6 from "../assets/asset7.jpg";
 import { useNavigate } from "react-router-dom";
-const properties = [
-  {
-    title: "Lumbini Elysee",
-    subtitle: "3,4 BHK Apartment, Financial District, Hyderabad",
-    price: "₹ 2.26 - 4.54 Cr",
-    img: icon1,
-    logo: icon1,
-    name: 'Houses',
-    id: 1
-  },
-  {
-    title: "Rishi Coral Wood Bungalows",
-    subtitle: "4,5 BHK Independent House/Villa, Bhopal",
-    price: "₹ 1.8 Cr",
-    img: icon2,
-    logo: icon6,
-    name: 'fishing-gear',
-    id: 2
-  },
-  {
-    title: "Ashiana",
-    subtitle: "1,2,3 BHK",
-    price: "₹ 84.6 Lakh",
-    img: icon3,
-    logo: icon5,
-    name: 'Houses',
-    id: 1
-  },
-];
+import useFetch from '../hooks/useFetch';
+import { getPropertiesList } from '../Api/services/propertyServices';
 
 const CustomArrow = ({ onClick, direction }) => (
   <div
@@ -52,6 +25,7 @@ const CustomArrow = ({ onClick, direction }) => (
 
 const ResidentialSlider = () => {
     const navigate = useNavigate();
+    const { data: properties, loading } = useFetch(getPropertiesList);
 
   const settings = {
     dots: false,
@@ -79,37 +53,41 @@ const ResidentialSlider = () => {
         Handpicked Residential Projects
       </h2>
       <p className="text-gray-500 mb-6 pb-10">Featured Residential projects across India</p>
-      <Slider {...settings}>
-        {properties.map((item, index) => (
-          <div key={index} className="px-2"  onClick={() => navigate(`/category/${item.name}/${item.id}`)}>
-            <div className="rounded-xl overflow-hidden shadow-md relative h-[280px] sm:h-[300px] md:h-[330px] lg:h-[350px]">
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-48 sm:h-52 md:h-56 lg:h-64 object-cover"
-              />
-              <div className="absolute top-2 left-2 bg-purple-700 text-white text-xs font-semibold px-2 py-1 rounded">
-                Featured
-              </div>
-              <div className="absolute top-2 right-2 text-white text-xl">
-                <FaStar />
-              </div>
-              <div className="bg-white rounded-xl p-3 sm:p-4 mt-[-1.5rem] sm:mt-[-2rem] mx-3 sm:mx-4 relative z-10 shadow-md h-[140px] sm:h-[150px] md:h-[160px] lg:h-[180px]">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shadow-md absolute -top-8 sm:-top-10 left-3 sm:left-4 border-4 border-white bg-white">
-                  <img src={item.logo} alt="logo" className="w-full h-full" />
+      {loading ? (
+        <div className="text-center py-10">Loading...</div>
+      ) : (
+        <Slider {...settings}>
+          {properties && properties.length > 0 ? properties.map((props, index) => (
+            <div key={index} className="px-2"  onClick={() => navigate(`/property/${props.id}`, { state: { property: props } })}>
+              <div className="rounded-xl overflow-hidden shadow-md relative h-[280px] sm:h-[300px] md:h-[330px] lg:h-[350px]">
+                <img
+                  src={props.property_images && props.property_images.length > 0 ? props.property_images[0] : icon1}
+                  alt={props.address || props.location || 'Property'}
+                  className="w-full h-48 sm:h-52 md:h-56 lg:h-64 object-cover"
+                />
+                <div className="absolute top-2 left-2 bg-purple-700 text-white text-xs font-semibold px-2 py-1 rounded">
+                  Featured
                 </div>
-                <div className="pl-16 sm:pl-20 h-full flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 line-clamp-1">{item.title}</h3>
-                    <p className="text-xs sm:text-sm text-gray-500 mt-1 line-clamp-2">{item.subtitle}</p>
+                <div className="absolute top-2 right-2 text-white text-xl">
+                  <FaStar />
+                </div>
+                <div className="bg-white rounded-xl p-3 sm:p-4 mt-[-1.5rem] sm:mt-[-2rem] mx-3 sm:mx-4 relative z-10 shadow-md h-[140px] sm:h-[150px] md:h-[160px] lg:h-[180px]">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shadow-md absolute -top-8 sm:-top-10 left-3 sm:left-4 border-4 border-white bg-white">
+                    <img src={props.property_images && props.property_images.length > 0 ? props.property_images[0] : icon1} alt="logo" className="w-full h-full" />
                   </div>
-                  <p className="text-sm sm:text-base font-bold text-indigo-700 mt-2">{item.price}</p>
+                  <div className="pl-16 sm:pl-20 h-full flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-800 line-clamp-1">{props.address || props.location}</h3>
+                      <p className="text-xs sm:text-sm text-gray-500 mt-1 line-clamp-2">{props.additional_detail || ''}</p>
+                    </div>
+                    <p className="text-sm sm:text-base font-bold text-indigo-700 mt-2">₹ {props.price}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          )) : <div className="text-center py-10">No properties found.</div>}
+        </Slider>
+      )}
     </div>
   );
 };

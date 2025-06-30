@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const PropertyCard = ({ image, bhk, price, area, location, images, name, id }) => {
+const PropertyCard = ({ image, bhk, price, area, location, images, name, id, ...prop }) => {
   const navigate = useNavigate();
 
   return (
     <div
       className="bg-white rounded-xl shadow-sm border w-[300px] transition-shadow duration-300 hover:shadow-custom-lg cursor-pointer"
-      onClick={() => navigate(`/category/${name}/${id}`)}
+      onClick={() => navigate(`/property/${id}`, { state: { property: prop } })}
     >
       <div className="relative">
         <img src={image} alt={location} className="rounded-t-xl h-48 w-full object-cover" />

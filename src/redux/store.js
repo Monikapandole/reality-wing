@@ -15,7 +15,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  category: categoryReducer, 
+  categories: categoryReducer, 
   property: propertyReducer,
   area:areasReducer
 });

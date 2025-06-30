@@ -6,6 +6,9 @@ const propertySlice = createSlice({
     properties: [],
   },
   reducers: {
+    setProperties: (state, action) => {
+      state.properties = action.payload;
+    },
     addProperty: (state, action) => {
       const newProperty = { id: Date.now(), ...action.payload };
       state.properties.push(newProperty);
@@ -20,5 +23,5 @@ const propertySlice = createSlice({
   },
 });
 
-export const { addProperty, updateProperty } = propertySlice.actions;
+export const { addProperty, updateProperty, setProperties } = propertySlice.actions;
 export default propertySlice.reducer;
