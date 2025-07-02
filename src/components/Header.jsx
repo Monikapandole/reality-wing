@@ -1,38 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import icon1 from "../assets/asset1.jpg";
-import icon2 from "../assets/asset1.jpg";
-import icon3 from "../assets/asset3.jpg";
-import icon4 from "../assets/asset5.jpg";
-import icon5 from "../assets/asset6.jpg";
-import icon6 from "../assets/asset7.jpg";
 import { useDispatch, useSelector } from 'react-redux';
 import { PiUserCircleDuotone } from 'react-icons/pi';
 import { logoutUser } from '../redux/actions/authActions';
 import { fetchCategories } from '../redux/actions/categoryActions';
 import { FaPhoneAlt, } from "react-icons/fa";
-import Logo from '../assets/applogo.png'
-
-const category = [
-    { name: "Apartments", slug: "apartments", img: icon1, tag: "Lowest Price" },
-    { name: "Villas", slug: "villas", img: icon2, tag: "New Offers" },
-    { name: "Studios", slug: "studios", img: icon3, tag: "Flat 30% off" },
-    { name: "Shared Rooms", slug: "shared-rooms", img: icon4, tag: "Flat 30% off" },
-    { name: "PG (Paying Guest)", slug: "pg-paying-guest", img: icon1, tag: "New" },
-    { name: "Hostels", slug: "hostels", img: icon5, tag: "new deal" },
-    { name: "Co-living Spaces", slug: "co-living-spaces", img: icon6, tag: "new deal" },
-    { name: "Luxury Homes", slug: "luxury-homes", img: icon1, tag: "Exclusive" },
-    { name: "Budget Rentals", slug: "budget-rentals", img: icon2, tag: "Budget Friendly" },
-    { name: "Short-Term Rentals", slug: "short-term-rentals", img: icon3, tag: "Flexible Stay" },
-    { name: "Long-Term Leases", slug: "long-term-leases", img: icon4, tag: "Best Deals" },
-    { name: "Pet-Friendly", slug: "pet-friendly", img: icon5, tag: "Pets Allowed" },
-    { name: "Furnished Rentals", slug: "furnished-rentals", img: icon6, tag: "Fully Furnished" },
-    { name: "Unfurnished Rentals", slug: "unfurnished-rentals", img: icon1, tag: "Customizable" },
-    { name: "Near Public Transport", slug: "near-public-transport", img: icon2, tag: "Great Connectivity" },
-    { name: "Parking Included", slug: "parking-included", img: icon3, tag: "Free Parking" },
-];
-
+import Logo from '../assets/applogo.jpeg'
 
 
 const Dropdown = ({ title, items, isOpen, setOpen }) => {
@@ -58,7 +32,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
         <div>
             <div className="relative"  >
                 <Link
-                    className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm ${isOpen ? 'text-[#D32F2F] border-b-2 border-[#D32F2F]' : ''}`}
+                    className={`xl:text-[15px] ipad-pro:text-base md:text-sm  text-sm ${isOpen ? 'text-[#D32F2F] border-b-2 border-[#D32F2F]' : ''}`}
                     onClick={() => handleOpen(title)}
                     ref={dropdownRef}
                     onMouseEnter={handleMouseEnter}
@@ -75,7 +49,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                 onMouseLeave={handleMouseLeave}
             >
 
-                <div className="grid grid-cols-1 md:grid-cols-6 gap-8 p-6 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-7 gap-8 p-6 w-full">
                     {items.map((item, index) => (
                         <div key={index}>
                             <ul className="space-y-2">
@@ -87,7 +61,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                                             state: { image: item.category_image }, // Add image to the state
                                         }}
                                         onClick={() => setOpen('')}
-                                        className="text-black hover:text-[#D32F2F] block text-[20px]"
+                                        className="text-black hover:text-[#D32F2F] block xl:text-[15px] ipad-pro:text-base md:text-sm  text-sm"
                                     >
                                         {item.category_name}
                                     </Link>
@@ -132,21 +106,20 @@ const Header = () => {
     const [hoverTimeout, setHoverTimeout] = useState(null);
 
     return (
-        <header className="content w-full h-[120px]     flex items-center justify-between z-50 bg-white shadow-lg fixed  font-inter ">
+        <header className="content w-full h-[120px] flex items-center justify-between z-50 bg-white shadow-lg fixed">
             <div className='flex flex-col w-full '>
-                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex items-center justify-between bg-white pt-8 border-b pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-0 ">
+                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex items-center justify-between bg-white pt-8 border-b pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-2 pb-3">
                     <div className="flex items-center space-x-2 w-[30%]">
                         <img
                             src={Logo}
                             alt="Kanthalya Herbals"
-                            className="h-20 "
+                            className="h-10 "
                         />
-                        <div className="flex items-center space-x-2 text-sm w-full">
-                            <FaPhoneAlt className="text-lg text-black" />
-                            <div>
-                                <p className="text-gray-600">Contact us 24/7</p>
-                                <p className="font-bold text-black">(+91) 00000 11111</p>
-                            </div>
+                        <div className="flex flex-col items-start pl-3 text-[13px]">
+                            <p className="text-gray-600">Contact us 24/7</p>
+                            <p className="font-bold text-black flex items-center gap-2 mt-1">
+                                <FaPhoneAlt className=" text-black" /> (+91) 00000 11111
+                            </p>
                         </div>
                     </div>
                     <div className="flex items-center space-x-6">
@@ -164,7 +137,7 @@ const Header = () => {
                             >
                                 <button className="flex items-center gap-3">
                                     <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
-                                   <span>Account</span>
+                                    <span>Account</span>
                                 </button>
 
                                 <motion.div
@@ -213,7 +186,7 @@ const Header = () => {
                             >
                                 <button
                                     onClick={() => setOpenDropdown(openDropdown === 'Login' ? '' : 'Login')}
-                                    className="flex items-center xl:text-lg ipad-pro:text-base md:text-sm text-sm hover:text-[#D32F2F]"
+                                    className="flex items-center xl:text-[15px] ipad-pro:text-base md:text-sm text-sm hover:text-[#D32F2F]"
                                 >
                                     Login
                                     <svg
@@ -271,10 +244,10 @@ const Header = () => {
 
 
 
-                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex gap-x-8 sm:gap-x-2 md:gap-x-3 lg:gap-x-8 xl:gap-x-8 2xl:gap-x-8 ipad-pro:gap-x-2  justify-start pr-0 pb-10 h-[80px] items-center pl-[7%] sm:pl-[40px] md:pl-[30px] xl:pl-[30px] ipad-pro:pl-[20px]  ">
+                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex gap-x-8 sm:gap-x-2 md:gap-x-3 lg:gap-x-8 xl:gap-x-8 2xl:gap-x-8 ipad-pro:gap-x-2  justify-start pr-0 pb-7 h-[80px] items-center pl-[7%] sm:pl-[40px] md:pl-[30px] xl:pl-[30px] ipad-pro:pl-[20px]  xl:text-[15px] ipad-pro:text-base md:text-sm  text-sm">
                     <Link
                         to="/Home"
-                        className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm  ${currentPath === "/Home" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                        className={`  ${currentPath === "/Home" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
                         onMouseEnter={() => setOpenDropdown('')}
                     >
                         Home
@@ -288,14 +261,14 @@ const Header = () => {
 
                     <Link
                         to="/about-us"
-                        className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm   ${currentPath === "/about-us" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                        className={`  ${currentPath === "/about-us" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
                         onMouseEnter={() => setOpenDropdown('')}
                     >
                         About US
                     </Link>
                     <Link
                         to="/blog"
-                        className={`xl:text-lg ipad-pro:text-base md:text-sm  text-sm   ${currentPath === "/blog" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                        className={`   ${currentPath === "/blog" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
                         onMouseEnter={() => setOpenDropdown('')}
                     >
                         Blog
@@ -355,13 +328,13 @@ const Header = () => {
                     {/* Dropdown for Mobile */}
                     {isMobileDropdownOpen && (
                         <div className="bg-white border-t border-gray-300 max-h-60 overflow-y-auto z-50 ">
-                            {category.map((category) => (
+                            {categories.map((category) => (
                                 <Link
-                                    key={category.name}
-                                    to={category.path}
+                                    key={category.category_name}
+                                    to={`/category/${category.slug}`}
                                     className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
                                 >
-                                    {category.name}
+                                    {category.category_name}
                                 </Link>
                             ))}
                         </div>

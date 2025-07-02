@@ -22,7 +22,7 @@ function Home() {
       subtitle: "2 Bedrooms, 1 Bath",
       tag: "Fully Furnished",
       buttonText: "BOOK NOW",
-      image: asset3, 
+      image: asset3,
     },
     {
       bgColor: "#A1C1D1",
@@ -31,7 +31,7 @@ function Home() {
       subtitle: "Perfect for Singles",
       tag: "Available Now",
       buttonText: "EXPLORE",
-      image: asset3, 
+      image: asset3,
     },
     {
       bgColor: "#F9C5D1",
@@ -40,7 +40,7 @@ function Home() {
       subtitle: "Private Pool & Ocean View",
       tag: "Weekend Getaway",
       buttonText: "BOOK NOW",
-      image: asset3, 
+      image: asset3,
     },
   ];
 
@@ -55,7 +55,7 @@ function Home() {
     dots: false
   };
   return (
-    <div className="w-full bg-white overflow-hidden font-inter">
+    <div className="w-full bg-white overflow-hidden">
       <div className="grid grid-cols-1 ipad-pro:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3">
         <Slider {...settings} className="w-full col-span-1 lg:col-span-2 ">
           {slides.map((slide, index) => (
@@ -122,12 +122,12 @@ function Home() {
       </div>
       <CategorySlider />
       <TopCities />
+      <PopularProperties />
       <ResidentialSlider />
       <UpcomingProjectsSlider />
-      <PopularProperties/>
       {/* <RentingAdviceTabs /> */}
       {/* <SellerCarousel/> */}
-      <Footer/>
+      <Footer />
 
     </div>
   )

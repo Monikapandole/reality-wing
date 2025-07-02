@@ -60,7 +60,7 @@ const handleSubmit = async (e) => {
 
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10 font-inter text-left">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10  text-left">
       <div className="bg-white shadow-xl rounded-xl flex flex-col md:flex-row overflow-hidden w-full max-w-6xl ">
         {/* Left Panel */}
         <div className="bg-gradient-to-br from-red-600 to-red-400 text-white p-8 md:w-1/2 items-start justify-center flex flex-col">

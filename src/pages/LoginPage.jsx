@@ -36,7 +36,7 @@ function LoginPage() {
     }
   };
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10 font-inter text-left">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10  text-left">
       <div className="bg-white shadow-xl rounded-xl flex flex-col md:flex-row overflow-hidden w-full max-w-4xl">
         {/* Left Panel */}
         <div className="bg-gradient-to-br from-red-600 to-red-400 text-white p-8 md:w-1/2">
@@ -97,7 +97,7 @@ function LoginPage() {
 
           {/* Sign up link */}
           <p className="text-center text-sm text-gray-500 mt-4">
-            Don’t have an account?{' '}
+            Don't have an account?{' '}
             <a href="/sign-up" className="text-red-500 font-semibold hover:underline">
               Sign Up
             </a>

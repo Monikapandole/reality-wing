@@ -8,7 +8,7 @@ import aboutUsImage from "../assets/aboutUs-bg.webp";
 
 function AboutUs() {
   return (
-    <div className="bg-white text-gray-800 font-inter">
+    <div className="bg-white text-gray-800">
 
       {/* Hero Section */}
       <section
@@ -150,7 +150,7 @@ function AboutUs() {
         </div>
 
         <p className="mt-10 text-lg">
-          Whether you're an owner looking to unlock your property’s full potential or a traveler seeking unforgettable experiences with unparalleled security, <br /> Reality Wing welcomes you.
+          Whether you're an owner looking to unlock your property's full potential or a traveler seeking unforgettable experiences with unparalleled security, <br /> Reality Wing welcomes you.
         </p>
 
         <p className="mt-10 font-semibold text-xl text-gray-900">

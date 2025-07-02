@@ -27,11 +27,20 @@ const ResidentialSlider = () => {
     const navigate = useNavigate();
     const { data: properties, loading } = useFetch(getPropertiesList);
 
+    const slidesToShow = 3; // or your default
+    let displayProperties = properties || [];
+
+    if (displayProperties.length > 0 && displayProperties.length < slidesToShow) {
+      // Repeat the array to fill at least slidesToShow items
+      const repeatCount = Math.ceil(slidesToShow / displayProperties.length);
+      displayProperties = Array(repeatCount).fill(displayProperties).flat().slice(0, slidesToShow);
+    }
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3.3,
+    slidesToShow: 3,
     slidesToScroll: 1,
     nextArrow: <CustomArrow direction="right" />,
     prevArrow: <CustomArrow direction="left" />,
@@ -48,7 +57,7 @@ const ResidentialSlider = () => {
   };
 
   return (
-    <div className="py-10 px-4 bg-white px-4 md:px-10 py-8 text-left font-inter">
+    <div className=" px-4 bg-white px-4 md:px-10 text-left ">
       <h2 className="text-3xl font-bold text-gray-800 mb-2 pt-10">
         Handpicked Residential Projects
       </h2>
@@ -57,8 +66,8 @@ const ResidentialSlider = () => {
         <div className="text-center py-10">Loading...</div>
       ) : (
         <Slider {...settings}>
-          {properties && properties.length > 0 ? properties.map((props, index) => (
-            <div key={index} className="px-2"  onClick={() => navigate(`/property/${props.id}`, { state: { property: props } })}>
+          {displayProperties.map((props, index) => (
+            <div key={index} className="px-2" onClick={() => navigate(`/property/${props.id}`, { state: { property: props } })}>
               <div className="rounded-xl overflow-hidden shadow-md relative h-[280px] sm:h-[300px] md:h-[330px] lg:h-[350px]">
                 <img
                   src={props.property_images && props.property_images.length > 0 ? props.property_images[0] : icon1}
@@ -85,7 +94,7 @@ const ResidentialSlider = () => {
                 </div>
               </div>
             </div>
-          )) : <div className="text-center py-10">No properties found.</div>}
+          ))}
         </Slider>
       )}
     </div>

@@ -63,7 +63,7 @@ const PopularProperties = () => {
   }, [categories, categoriesLoading, dispatch]);
 
   return (
-    <section className="p-6 text-left mb-12">
+    <section className="p-6 text-left ">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold">Popular Owner Properties</h2>
         <a href={`/category/All-Property`} className="text-red-600 font-semibold hover:underline">
@@ -86,7 +86,7 @@ const PopularProperties = () => {
               name: category ? category.category_name : "Uncategorized",
             };
             return (
-              <div key={index} >
+              <div key={index}  className="p-4">
                 <PropertyCard {...formattedProp} prop={prop} />
               </div>
             );

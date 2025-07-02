@@ -1,19 +1,21 @@
 import React from 'react';
+import Logo from '../assets/footerLogo.png'; // Adjust the path if needed
 
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-red-600 to-red-400 text-white pt-12 pb-6 text-left">
-      <div className=" px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div className="px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+        
         {/* About Section */}
         <div>
-          <h2 className="text-xl font-semibold text-white mb-4">Reality Wing</h2>
+          <img src={Logo} alt="Reality Wing Logo" className="h-14 mb-4" />
           <p className="text-sm">
             Reality Wing helps you find rental properties quickly and easily. Whether you're a tenant or landlord, our platform makes renting effortless.
           </p>
         </div>
 
         {/* Quick Links */}
-        <div >
+        <div>
           <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="/" className="hover:text-white">Home</a></li>
@@ -25,20 +27,20 @@ const Footer = () => {
 
         {/* Popular Cities */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4  ml-10">Popular Areas</h3>
-          <div className=' flex flex-row gap-8'>
-          <ul className="space-y-2 text-sm">
-            <li><a href="/" className="hover:text-white">Vijay Nagar</a></li>
-            <li><a href="/" className="hover:text-white">Palasia</a></li>
-            <li><a href="/" className="hover:text-white">Bhawarkua</a></li>
-            <li><a href="/" className="hover:text-white">Rau</a></li>
-          </ul>
-          <ul className="space-y-2 text-sm">
-            <li><a href="/" className="hover:text-white">Scheme No. 78</a></li>
-            <li><a href="/" className="hover:text-white">Bengali Square</a></li>
-            <li><a href="/" className="hover:text-white">MR 10 / MR 11</a></li>
-            <li><a href="/" className="hover:text-white">Khajrana</a></li>
-          </ul>
+          <h3 className="text-lg font-semibold text-white mb-4 ml-10">Popular Areas</h3>
+          <div className="flex flex-row gap-8">
+            <ul className="space-y-2 text-sm">
+              <li><a href="/" className="hover:text-white">Vijay Nagar</a></li>
+              <li><a href="/" className="hover:text-white">Palasia</a></li>
+              <li><a href="/" className="hover:text-white">Bhawarkua</a></li>
+              <li><a href="/" className="hover:text-white">Rau</a></li>
+            </ul>
+            <ul className="space-y-2 text-sm">
+              <li><a href="/" className="hover:text-white">Scheme No. 78</a></li>
+              <li><a href="/" className="hover:text-white">Bengali Square</a></li>
+              <li><a href="/" className="hover:text-white">MR 10 / MR 11</a></li>
+              <li><a href="/" className="hover:text-white">Khajrana</a></li>
+            </ul>
           </div>
         </div>
 
@@ -59,9 +61,9 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom */}
-      <div className="border-t border-gray-700 mt-10 pt-4 text-left flex  text-sm text-white  px-6 gap-6">
+      <div className="border-t border-gray-700 mt-10 pt-4 text-left flex text-sm text-white px-6 gap-6 flex-wrap">
         <p>&copy; 2025 Reality Wing. All rights reserved.</p>
-        <div className=" space-x-4">
+        <div className="space-x-4">
           <a href="/privacy-policy" className="hover:text-white">Privacy Policy</a>
           <a href="/terms-and-conditions" className="hover:text-white">Terms of Service</a>
           <a href="/" className="hover:text-white">Help</a>
