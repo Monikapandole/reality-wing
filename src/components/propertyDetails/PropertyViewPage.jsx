@@ -13,43 +13,28 @@ function PropertyViewPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { properties } = useSelector((state) => state.property);
-  const [item, setItem] = useState(location.state?.property?.prop || location.state?.property  || null);
+  const [item, setItem] = useState(location.state?.property?.prop || location.state?.property || null);
   const [loading, setLoading] = useState(!item);
   const [currentImage, setCurrentImage] = useState(0); // for image count
+  const [showPopup, setShowPopup] = useState(false);
 
+
+
+  const handleRequestClick = () => setShowPopup(true);
+  const handleClosePopup = () => setShowPopup(false);
+  const handleConfirmRequest = () => {
+    // Handle actual request logic here
+    console.log('Property request sent!');
+    setShowPopup(false);
+  };
   useEffect(() => {
-            console.log(location.state?.property ,"location.")
+    console.log(location.state?.property, "location.")
 
     if (item) {
-        console.log(location.state?.property ,"location.state?.property")
+      console.log(location.state?.property, "location.state?.property")
       setLoading(false);
       return;
     }
-
-    // Optional fetch if not passed from previous screen
-    // const fetchAndSetProperty = async () => {
-    //   setLoading(true);
-    //   try {
-    //     let propertyToSet = null;
-    //     if (properties.length > 0) {
-    //       propertyToSet = properties.find((p) => p.id.toString() === id);
-    //     } else {
-    //       const fetchedProperties = await getPropertiesList();
-    //       if (fetchedProperties) {
-    //         dispatch(setProperties(fetchedProperties));
-    //         propertyToSet = fetchedProperties.find((p) => p.id.toString() === id);
-    //       }
-    //     }
-    //     setItem(propertyToSet);
-    //   } catch (error) {
-    //     console.error("Failed to fetch property details:", error);
-    //     setItem(null);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-
-    // fetchAndSetProperty();
   }, [id, properties, dispatch, item, location.state]);
 
   if (loading) return <Loader />;
@@ -91,6 +76,8 @@ function PropertyViewPage() {
     amenities: item.amenities,
     availableFrom: formatDate(item.availability_date),
   };
+
+
 
   const sliderSettings = {
     dots: true,
@@ -148,7 +135,9 @@ function PropertyViewPage() {
 
             <p className="text-sm text-gray-500 mt-4">Posted by Owner</p>
 
-            <button className="bg-red-600 text-white px-4 py-2 rounded mt-2 hover:bg-red-700">
+            <button className="bg-red-600 text-white px-4 py-2 rounded mt-2 hover:bg-red-700"
+              onClick={handleRequestClick}
+            >
               Request For Property
             </button>
           </div>
@@ -165,6 +154,29 @@ function PropertyViewPage() {
           <p><strong>Category ID:</strong> {property.type}</p>
         </div>
       </div>
+
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-xl text-center">
+            <h2 className="text-2xl font-bold mb-4">Confirm Request</h2>
+            <p className="text-gray-700 mb-6">Are you sure you want to request this property?</p>
+            <div className="flex justify-center gap-4">
+              <button
+                className="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400"
+                onClick={handleClosePopup}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700"
+                onClick={handleConfirmRequest}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

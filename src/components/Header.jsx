@@ -57,7 +57,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                                 <li key={item.category_name}>
                                     <Link
                                         to={{
-                                            pathname: `/category/${item.slug}`,
+                                            pathname: `/category/${item.id}`,
                                             state: { image: item.category_image }, // Add image to the state
                                         }}
                                         onClick={() => setOpen('')}
@@ -331,7 +331,7 @@ const Header = () => {
                             {categories.map((category) => (
                                 <Link
                                     key={category.category_name}
-                                    to={`/category/${category.slug}`}
+                                    to={`/category/${category.id}`}
                                     className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
                                 >
                                     {category.category_name}

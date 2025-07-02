@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { getPropertyById } from '../Api/services/propertyServices'; // Import the service
 import Loader from './common/Loader'; // Assuming you have a Loader component
 
 function CategoryPage() {
@@ -12,30 +11,7 @@ function CategoryPage() {
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
 
-  useEffect(() => {
-    const fetchProperty = async () => {
-      try {
-        setLoading(true);
-        const response = await getPropertyById(id);
-        console.log("API Response:", response); // Log the full response
-        if (response && response.data) {
-          setItem(response.data);
-        } else {
-          console.log("Setting item to null, no data found in response");
-          setItem(null);
-        }
-      } catch (error) {
-        console.error("Failed to fetch property details:", error);
-        setItem(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchProperty();
-    }
-  }, [id]);
+  
 
   const handleRequestClick = () => setShowPopup(true);
   const handleClosePopup = () => setShowPopup(false);
