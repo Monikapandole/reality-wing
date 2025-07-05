@@ -53,7 +53,6 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                     {items.map((item, index) => (
                         <div key={index}>
                             <ul className="space-y-2">
-                                {/* {group.items.map((item) => ( */}
                                 <li key={item.category_name}>
                                     <Link
                                         to={{
@@ -66,7 +65,6 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                                         {item.category_name}
                                     </Link>
                                 </li>
-                                {/* ))} */}
                             </ul>
                         </div>
                     ))}
@@ -152,7 +150,7 @@ const Header = () => {
                                             className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
                                         >
                                             <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
-                                            <span>{user.id}</span>
+                                            <span>{user.name || user.email || user.id}</span>
                                         </Link>
                                         <Link
                                             to="/properties-list"

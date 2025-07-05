@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 const PropertyListPage = () => {
     const navigate = useNavigate();
     const properties = useSelector((state) => state.property.properties);
+    console.log(properties ,"properties")
     return (
-        <div className="p-6">
+        <div className="p-6 pt-[80px]">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold">Properties</h2>
                 <button
@@ -31,9 +32,9 @@ const PropertyListPage = () => {
                     <tbody>
                         {properties.map((property) => (
                             <tr key={property.id} className="border-t">
-                                <td className="px-6 py-4">{property.owner}</td>
-                                <td className="px-6 py-4">{property.mobile}</td>
-                                <td className="px-6 py-4">{property.type}</td>
+                                <td className="px-6 py-4">{property.owner_name}</td>
+                                <td className="px-6 py-4">{property.owner_contact}</td>
+                                <td className="px-6 py-4">{property.furnished}</td>
                                 <td className="px-6 py-4">{property.address}</td>
                                 <td className="px-6 py-4">{property.price}</td>
                                 <td className="px-6 py-4 space-x-2">

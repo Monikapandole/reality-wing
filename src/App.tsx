@@ -18,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PropertyListPage from './pages/property';
 import AddPropertyForm from './components/propertyDetails/addPropertyForm';
 import PropertyViewPage from './components/propertyDetails/PropertyViewPage';
+import Profile from './pages/Profile';
 function App() {
   return (
     <BrowserRouter>
@@ -40,6 +41,7 @@ function App() {
             <Route path="/property/:id" element={<><ScrollToTop /><PropertyViewPage /></>} />
 
             <Route path="/edit-property/:id" element={<><ScrollToTop /><AddPropertyForm /></>} />
+            <Route path="/profile" element={<><ScrollToTop /><Profile /></>} />
             {/* Show details for an individual item */}
             <Route path="/category/:name/:id" element={<><ScrollToTop /><CategoryPage /></>} />
             <Route path="/privacy-policy" element={<><ScrollToTop /><PrivacyPolicy /></>} />
