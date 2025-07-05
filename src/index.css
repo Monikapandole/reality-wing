@@ -1,6 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  * {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
 @layer utilities {
     input[type='number']::-webkit-inner-spin-button,
     input[type='number']::-webkit-outer-spin-button {
@@ -9,12 +24,10 @@
     input[type='number'] {
       @apply appearance-none;
     }
-  }
+}
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-body, * {
-    font-family: 'Montserrat';
 }

@@ -9,6 +9,7 @@ function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const {auth ,user} = useSelector(state =>
    state
@@ -16,6 +17,14 @@ function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async () => {
+    if (!email || !password) {
+      setError('Please fill in all fields');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+    
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
@@ -23,16 +32,18 @@ function LoginPage() {
     try {
       const response = await userLogin(formData, auth.token);  
       console.log('Login success:', response);
-    toast.success('Login Successfully!');
+      toast.success('Login Successfully!');
       if (response && response.JWT) {
         console.log(response ,"response")
         const { JWT, user_id } = response;
-      dispatch(setUser({ JWT, user: { id: user_id } }));
-      navigate('/home');
+        dispatch(setUser({ JWT, user: { id: user_id } }));
+        navigate('/home');
       }
     } catch (err) {
       setError('Invalid email or password');
       console.error('Login error:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -90,9 +101,21 @@ function LoginPage() {
           {/* Login button */}
           <button
             onClick={handleLogin}
-            className="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 rounded-md transition-all"
+            disabled={isLoading}
+            className={`w-full font-medium py-2 rounded-md transition-all flex items-center justify-center ${
+              isLoading 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-red-500 hover:bg-red-600 text-white'
+            }`}
           >
-            Login
+            {isLoading ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                Logging in...
+              </>
+            ) : (
+              'Login'
+            )}
           </button>
 
           {/* Sign up link */}

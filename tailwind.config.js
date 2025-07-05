@@ -6,6 +6,8 @@ module.exports = {
     theme: {
       extend: {
         fontFamily: {
+          sans: ['Montserrat', 'sans-serif'],
+          montserrat: ['Montserrat', 'sans-serif'],
           quicksand: ['Quicksand', 'sans-serif'],
           rubik:['Rubik'],
           chivo:['Chivo'],
