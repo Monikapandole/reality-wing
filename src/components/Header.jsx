@@ -116,7 +116,7 @@ const Header = () => {
                         <div className="flex flex-col items-start pl-3 text-[13px]">
                             <p className="text-gray-600">Contact us 24/7</p>
                             <p className="font-bold text-black flex items-center gap-2 mt-1">
-                                <FaPhoneAlt className=" text-black" /> (+91) 00000 11111
+                                <FaPhoneAlt className=" text-black" /> (+91) 95220 57045
                             </p>
                         </div>
                     </div>

@@ -19,6 +19,7 @@ import PropertyListPage from './pages/property';
 import AddPropertyForm from './components/propertyDetails/addPropertyForm';
 import PropertyViewPage from './components/propertyDetails/PropertyViewPage';
 import Profile from './pages/Profile';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
             <Route path="/blog" element={<><ScrollToTop /><Blog /></>} />
             <Route path="/sign-up" element={<><ScrollToTop /><SignUpPage /></>} />
             <Route path="/login" element={<><ScrollToTop /><LoginPage /></>} />
+            <Route path="/forgot-password" element={<><ScrollToTop /><ForgotPasswordPage /></>} />
             {/* Show all categories */}
             <Route path="/category/:id" element={<><ScrollToTop /><CategoryListPage /></>} />
             <Route path="/area/:areaId" element={<><ScrollToTop /><CategoryListPage /></>} />

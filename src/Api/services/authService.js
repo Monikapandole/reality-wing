@@ -46,3 +46,16 @@ export const getUserProfile = async (token) => {
   });
   return response.data;
 };
+
+// Forgot Password
+export const forgotPassword = async (newPassword, confirmPassword) => {
+  const formData = new FormData();
+  formData.append('newPassword', newPassword);
+  formData.append('confirmPassword', confirmPassword);
+  const response = await axiosInstance.post('/forgotPassword', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
