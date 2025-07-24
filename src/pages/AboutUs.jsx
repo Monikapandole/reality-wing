@@ -31,21 +31,22 @@ function AboutUs() {
       </section>
 
       {/* About Us Details Section */}
+      {/* About Us Intro Section */}
       <section className="py-24 px-6 bg-white">
         <div className="text-left flex flex-col lg:flex-row items-start gap-12">
           {/* Text Content */}
           <div className="lg:w-1/2">
             <h2 className="text-4xl font-bold mb-4">
-              About Us – <span className="text-[#D32F2F]">Reality Wing</span>
+              Who We Are – <span className="text-[#D32F2F]">Reality Wing</span>
             </h2>
             <p className="font-semibold text-lg mb-4">
-              At Reality Wing, we are your trusted partner in real estate solutions across Indore. Whether you're looking to rent, buy, or sell a property, we make the process smooth, transparent, and hassle-free.
+              At Reality Wing, we're committed to redefining real estate in Indore. Whether you're renting, buying, or selling – we handle it all without the usual hassle.
             </p>
             <p className="text-gray-700 mb-4">
-              We specialize in providing verified tenants, ensuring property owners get the right match without any stress. The best part? 0% brokerage for property owners – because we believe in building trust, not charging extra.
+              Say goodbye to brokerage fees! Our model is built on trust and simplicity – offering property owners verified tenants with 0% brokerage.
             </p>
             <p className="text-gray-700">
-              Our platform features rental listings, tenant verification, and quick support, all tailored to your needs. With Reality Wing, your property journey is in safe hands.
+              Our team focuses on personalized support, smart technology, and fast results – ensuring that every home finds the right match.
             </p>
           </div>
 
@@ -59,7 +60,32 @@ function AboutUs() {
           </div>
         </div>
       </section>
-      <section className="py-24 px-6 text-center bg-[#fef4f1]">
+
+      {/* Why Choose Us Section */}
+      <section className="py-24 px-6 bg-gray-100">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">Why Choose Reality Wing?</h2>
+          <p className="text-gray-700 text-lg mb-12">
+            Here’s what sets us apart in the Indore real estate space.
+          </p>
+          <div className="grid md:grid-cols-3 gap-10 text-left">
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-all">
+              <h4 className="text-xl font-semibold mb-2 text-[#D32F2F]">Zero Brokerage</h4>
+              <p className="text-gray-600">No hidden charges – our platform is truly cost-effective for property owners.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-all">
+              <h4 className="text-xl font-semibold mb-2 text-[#D32F2F]">Verified Tenants</h4>
+              <p className="text-gray-600">We ensure tenant credibility through background checks and verification.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-all">
+              <h4 className="text-xl font-semibold mb-2 text-[#D32F2F]">Quick Support</h4>
+              <p className="text-gray-600">Our dedicated support ensures your queries and needs are handled promptly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 text-center bg-white">
         <h2 className="text-4xl font-semibold mb-12">Meet Our Team</h2>
         <div className="grid md:grid-cols-3 gap-12">
           <div className="transition-all hover:scale-105">

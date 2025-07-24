@@ -20,11 +20,12 @@ import AddPropertyForm from './components/propertyDetails/addPropertyForm';
 import PropertyViewPage from './components/propertyDetails/PropertyViewPage';
 import Profile from './pages/Profile';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResidentialDetail from './components/ResidentialDetail';
 function App() {
   return (
     <BrowserRouter>
       <ToastContainer />
-      <div className="App">
+      <div className="bg-[#f5f5f5]">
         <Header />
         <div className="pt-[80px]">
           <Routes>
@@ -35,16 +36,14 @@ function App() {
             <Route path="/sign-up" element={<><ScrollToTop /><SignUpPage /></>} />
             <Route path="/login" element={<><ScrollToTop /><LoginPage /></>} />
             <Route path="/forgot-password" element={<><ScrollToTop /><ForgotPasswordPage /></>} />
-            {/* Show all categories */}
             <Route path="/category/:id" element={<><ScrollToTop /><CategoryListPage /></>} />
             <Route path="/area/:areaId" element={<><ScrollToTop /><CategoryListPage /></>} />
             <Route path="/properties-list" element={<><ScrollToTop /><PropertyListPage /></>} />
             <Route path="/add-property" element={<><ScrollToTop /><AddPropertyForm /></>} />
             <Route path="/property/:id" element={<><ScrollToTop /><PropertyViewPage /></>} />
-
+            <Route path="/project/:id" element={<ResidentialDetail />} />
             <Route path="/edit-property/:id" element={<><ScrollToTop /><AddPropertyForm /></>} />
             <Route path="/profile" element={<><ScrollToTop /><Profile /></>} />
-            {/* Show details for an individual item */}
             <Route path="/category/:name/:id" element={<><ScrollToTop /><CategoryPage /></>} />
             <Route path="/privacy-policy" element={<><ScrollToTop /><PrivacyPolicy /></>} />
             <Route path="/terms-and-conditions" element={<><ScrollToTop /><TermsAndConditions /></>} />

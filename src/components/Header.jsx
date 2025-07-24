@@ -30,7 +30,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
 
     return (
         <div>
-            <div className="relative"  >
+            <div className="relative bg-[#f5f5f5]"  >
                 <Link
                     className={`xl:text-[15px] ipad-pro:text-base md:text-sm  text-sm ${isOpen ? 'text-[#D32F2F] border-b-2 border-[#D32F2F]' : ''}`}
                     onClick={() => handleOpen(title)}
@@ -44,7 +44,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={isOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="absolute bg-white left-10 right-5 top-[120px] rounded-b-[20px] w-[95%] z-50 text-left overflow-hidden"
+                className="absolute bg-[#f5f5f5] left-10 right-5 top-[120px] rounded-b-[20px] w-[95%] z-50 text-left overflow-hidden"
                 style={{ boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)' }}
                 onMouseLeave={handleMouseLeave}
             >
@@ -104,9 +104,9 @@ const Header = () => {
     const [hoverTimeout, setHoverTimeout] = useState(null);
 
     return (
-        <header className="content w-full h-[120px] flex items-center justify-between z-50 bg-white shadow-lg fixed">
+        <header className="content w-full h-[120px] flex items-center justify-between z-50 bg-[#f5f5f5] shadow-lg fixed">
             <div className='flex flex-col w-full '>
-                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex items-center justify-between bg-white pt-8 border-b pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-2 pb-3">
+                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex items-center justify-between bg-[#f5f5f5] pt-8 border-b pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-2 pb-3">
                     <div className="flex items-center space-x-2 w-[30%]">
                         <img
                             src={Logo}
@@ -142,7 +142,7 @@ const Header = () => {
                                     initial={{ opacity: 0, height: 0 }}
                                     animate={openDropdown === 'Profile' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
                                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                    className="absolute right-0 mt-2 w-40 top-[40px] bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
+                                    className="absolute right-0 mt-2 w-40 top-[40px] bg-[#f5f5f5] text-left rounded-lg shadow-lg z-50 overflow-hidden"
                                 >
                                     <div className="p-2">
                                         <Link
@@ -202,7 +202,7 @@ const Header = () => {
                                     initial={{ opacity: 0, height: 0 }}
                                     animate={openDropdown === 'Login' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
                                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                    className="absolute right-0 mt-2 w-64  top-[40px]  bg-white text-left rounded-lg shadow-lg z-50 overflow-hidden"
+                                    className="absolute right-0 mt-2 w-64  top-[40px]  bg-[#f5f5f5] text-left rounded-lg shadow-lg z-50 overflow-hidden"
 
                                 >
                                     <div className="p-4">
@@ -297,7 +297,7 @@ const Header = () => {
             </button>
             <div
                 ref={menuRef}
-                className={`ipad-pro:hidden xl:hidden absolute top-16 z-50 right-0 w-48 bg-white border border-gray-300 shadow-lg ${isMenuOpen ? "block" : "hidden"
+                className={`ipad-pro:hidden xl:hidden absolute top-16 z-50 right-0 w-48 bg-[#f5f5f5]  border border-gray-300 shadow-lg ${isMenuOpen ? "block" : "hidden"
                     } max-h-96 overflow-y-auto`}
             >
                 <Link to="/about-us" className="block px-4 py-2 text-lg hover:bg-gray-200">
@@ -325,7 +325,7 @@ const Header = () => {
 
                     {/* Dropdown for Mobile */}
                     {isMobileDropdownOpen && (
-                        <div className="bg-white border-t border-gray-300 max-h-60 overflow-y-auto z-50 ">
+                        <div className="bg-[#f5f5f5] border-t border-gray-300 max-h-60 overflow-y-auto z-50 ">
                             {categories.map((category) => (
                                 <Link
                                     key={category.category_name}
