@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { getPropertiesList } from '../../Api/services/propertyServices';
+import { getPropertiesList, sendPropertyRequest } from '../../Api/services/propertyServices';
 import { setProperties } from '../../redux/Slice/propertySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../common/Loader';
@@ -13,6 +13,7 @@ function PropertyViewPage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { properties } = useSelector((state) => state.property);
+  const { user, token } = useSelector((state) => state.auth);
   const [item, setItem] = useState(location.state?.property?.prop || location.state?.property || null);
   const [loading, setLoading] = useState(!item);
   const [currentImage, setCurrentImage] = useState(0); // for image count
@@ -22,9 +23,23 @@ function PropertyViewPage() {
 
   const handleRequestClick = () => setShowPopup(true);
   const handleClosePopup = () => setShowPopup(false);
-  const handleConfirmRequest = () => {
-    // Handle actual request logic here
-    console.log('Property request sent!');
+  const handleConfirmRequest = async () => {
+    if (!user?.id || !token) {
+      alert('You must be logged in to request this property.');
+      setShowPopup(false);
+      return;
+    }
+    try {
+      await sendPropertyRequest({
+        property_id: item.id,
+        user_id: user.id,
+        status: '0',
+        token,
+      });
+      alert('Property request sent!');
+    } catch (error) {
+      alert('Failed to send property request.');
+    }
     setShowPopup(false);
   };
   useEffect(() => {
