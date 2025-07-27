@@ -6,7 +6,7 @@ import { PiUserCircleDuotone } from 'react-icons/pi';
 import { logoutUser } from '../redux/actions/authActions';
 import { fetchCategories } from '../redux/actions/categoryActions';
 import { FaPhoneAlt, } from "react-icons/fa";
-import Logo from '../assets/applogo.jpeg'
+import Logo from '../assets/footerLogo.png'
 
 
 const Dropdown = ({ title, items, isOpen, setOpen }) => {
