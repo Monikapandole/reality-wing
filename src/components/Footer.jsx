@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#f5f5f5] shadow-lg text-black pt-12 pb-6 text-left">
       <div className="px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
-        
+
         {/* About Section */}
         <div>
           <img src={Logo} alt="Reality Wing Logo" className="h-14 mb-4" />
@@ -66,7 +66,6 @@ const Footer = () => {
         <div className="space-x-4">
           <a href="/privacy-policy" className="hover:text-black">Privacy Policy</a>
           <a href="/terms-and-conditions" className="hover:text-black">Terms of Service</a>
-          <a href="/" className="hover:text-black">Help</a>
         </div>
       </div>
     </footer>

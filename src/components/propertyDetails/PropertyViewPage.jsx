@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { getPropertiesList, sendPropertyRequest } from '../../Api/services/propertyServices';
 import { setProperties } from '../../redux/Slice/propertySlice';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import Loader from '../common/Loader';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { toast } from 'react-toastify';
 
 function PropertyViewPage() {
   const { id } = useParams();
@@ -18,29 +19,42 @@ function PropertyViewPage() {
   const [loading, setLoading] = useState(!item);
   const [currentImage, setCurrentImage] = useState(0); // for image count
   const [showPopup, setShowPopup] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const navigate = useNavigate();
 
 
 
-  const handleRequestClick = () => setShowPopup(true);
+  const handleRequestClick = () => {
+    if (!user?.id || !token) {
+      navigate('/login');
+      return
+    }
+
+    setShowPopup(true)
+  };
   const handleClosePopup = () => setShowPopup(false);
   const handleConfirmRequest = async () => {
     if (!user?.id || !token) {
-      alert('You must be logged in to request this property.');
+      toast.warn('You must be logged in to request this property.');
       setShowPopup(false);
       return;
     }
     try {
+      setConfirmLoading(true); // Start loading
       await sendPropertyRequest({
         property_id: item.id,
         user_id: user.id,
         status: '0',
         token,
       });
-      alert('Property request sent!');
+      toast.success('Property request sent!');
     } catch (error) {
-      alert('Failed to send property request.');
+      console.log(error?.response?.data?.msg, "error");
+      toast.error(error?.response?.data?.msg || 'Failed to send property request.');
+    } finally {
+      setConfirmLoading(false); // Stop loading
+      setShowPopup(false);
     }
-    setShowPopup(false);
   };
   useEffect(() => {
     console.log(location.state?.property, "location.")
@@ -183,11 +197,13 @@ function PropertyViewPage() {
                 Cancel
               </button>
               <button
-                className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700"
+                className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={handleConfirmRequest}
+                disabled={confirmLoading}
               >
-                Confirm
+                {confirmLoading ? "Processing..." : "Confirm"}
               </button>
+
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ const CategorySlider = () => {
     ],
   };
 
-  const handleClick = (slug, image ,id) => {
+  const handleClick = (slug, image, id) => {
     navigate(`/category/${id}`, { state: { image } });
   }
   return (
@@ -53,7 +53,7 @@ const CategorySlider = () => {
       <h2 className="text-2xl font-bold mb-6">Explore Our Category</h2>
       <Slider {...settings}>
         {[...categories, ...categories, ...categories].map((cat, index) => (
-          <div key={index} className="px-2 mt-[30px]" onClick={() => handleClick(cat.category_name, cat.category_image ,cat.id)}>
+          <div key={index} className="px-2 mt-[30px]" onClick={() => handleClick(cat.category_name, cat.category_image, cat.id)}>
             <div className="flex flex-col items-center text-center">
               {cat.slug && (
                 <span className="bg-orange-100 text-sm font-semibold text-gray-700 px-3 py-1 rounded-full mb-2">
@@ -68,7 +68,6 @@ const CategorySlider = () => {
                     className="w-36 h-36 rounded-full "
                   />
                 </div>
-                <p className="text-md font-medium mt-2 text-center">{cat.category_name}</p>
               </div>
             </div>
           </div>

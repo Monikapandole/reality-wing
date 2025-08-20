@@ -21,6 +21,7 @@ import PropertyViewPage from './components/propertyDetails/PropertyViewPage';
 import Profile from './pages/Profile';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResidentialDetail from './components/ResidentialDetail';
+import AllPropertiesPage from './pages/AllPropertiesPage';
 function App() {
   return (
     <BrowserRouter>
@@ -41,6 +42,7 @@ function App() {
             <Route path="/properties-list" element={<><ScrollToTop /><PropertyListPage /></>} />
             <Route path="/add-property" element={<><ScrollToTop /><AddPropertyForm /></>} />
             <Route path="/property/:id" element={<><ScrollToTop /><PropertyViewPage /></>} />
+            <Route path="/all-properties" element={<AllPropertiesPage />} />
             <Route path="/project/:id" element={<ResidentialDetail />} />
             <Route path="/edit-property/:id" element={<><ScrollToTop /><AddPropertyForm /></>} />
             <Route path="/profile" element={<><ScrollToTop /><Profile /></>} />

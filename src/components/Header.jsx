@@ -44,7 +44,7 @@ const Dropdown = ({ title, items, isOpen, setOpen }) => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={isOpen ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className="absolute bg-[#f5f5f5] left-10 right-5 top-[120px] rounded-b-[20px] w-[95%] z-50 text-left overflow-hidden"
+                className="absolute bg-[#f5f5f5] left-10 right-5 top-[100px] rounded-b-[20px] w-[95%] z-50 text-left overflow-hidden"
                 style={{ boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)' }}
                 onMouseLeave={handleMouseLeave}
             >
@@ -104,20 +104,46 @@ const Header = () => {
     const [hoverTimeout, setHoverTimeout] = useState(null);
 
     return (
-        <header className="content w-full h-[120px] flex items-center justify-between z-50 bg-[#f5f5f5] shadow-lg fixed">
+        <header className="content w-full h-[100px] flex items-center justify-between z-50 bg-[#f5f5f5] shadow-lg fixed">
             <div className='flex flex-col w-full '>
-                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex items-center justify-between bg-[#f5f5f5] pt-8 border-b pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-2 pb-3">
-                    <div className="flex items-center space-x-2 w-[30%]">
+                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex items-center justify-between bg-[#f5f5f5]   pr-[7%] sm:pr-[40px] md:pr-[20px] xl:pr-[20px] ipad-pro:pr-[20px]  pl-2">
+                    <div className="flex items-center space-x-2 ">
                         <img
                             src={Logo}
                             alt="Kanthalya Herbals"
                             className="h-10 "
                         />
-                        <div className="flex flex-col items-start pl-3 text-[13px]">
-                            <p className="text-gray-600">Contact us 24/7</p>
-                            <p className="font-bold text-black flex items-center gap-2 mt-1">
-                                <FaPhoneAlt className=" text-black" /> (+91) 95220 57045
-                            </p>
+                        <div className="flex flex-col items-start pt-8">
+                            <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex gap-x-8 sm:gap-x-2 md:gap-x-3 lg:gap-x-8 xl:gap-x-8 2xl:gap-x-8 ipad-pro:gap-x-2  justify-start pr-0 pb-7 h-[80px] items-center pl-[7%] sm:pl-[40px] md:pl-[30px] xl:pl-[30px] ipad-pro:pl-[20px]  xl:text-[15px] ipad-pro:text-base md:text-sm  text-sm">
+                                <Link
+                                    to="/Home"
+                                    className={`  ${currentPath === "/Home" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                                    onMouseEnter={() => setOpenDropdown('')}
+                                >
+                                    Home
+                                </Link>
+                                <Dropdown
+                                    title="Category"
+                                    items={categories}
+                                    isOpen={openDropdown === 'Category'}
+                                    setOpen={setOpenDropdown}
+                                />
+
+                                <Link
+                                    to="/about-us"
+                                    className={`  ${currentPath === "/about-us" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                                    onMouseEnter={() => setOpenDropdown('')}
+                                >
+                                    About US
+                                </Link>
+                                <Link
+                                    to="/blog"
+                                    className={`   ${currentPath === "/blog" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
+                                    onMouseEnter={() => setOpenDropdown('')}
+                                >
+                                    Blog
+                                </Link>
+                            </div>
                         </div>
                     </div>
                     <div className="flex items-center space-x-6">
@@ -240,38 +266,6 @@ const Header = () => {
                     </div>
                 </div>
 
-
-
-                <div className="flex-grow hidden md:hidden ipad-pro:flex xl:flex gap-x-8 sm:gap-x-2 md:gap-x-3 lg:gap-x-8 xl:gap-x-8 2xl:gap-x-8 ipad-pro:gap-x-2  justify-start pr-0 pb-7 h-[80px] items-center pl-[7%] sm:pl-[40px] md:pl-[30px] xl:pl-[30px] ipad-pro:pl-[20px]  xl:text-[15px] ipad-pro:text-base md:text-sm  text-sm">
-                    <Link
-                        to="/Home"
-                        className={`  ${currentPath === "/Home" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
-                        onMouseEnter={() => setOpenDropdown('')}
-                    >
-                        Home
-                    </Link>
-                    <Dropdown
-                        title="Category"
-                        items={categories}
-                        isOpen={openDropdown === 'Category'}
-                        setOpen={setOpenDropdown}
-                    />
-
-                    <Link
-                        to="/about-us"
-                        className={`  ${currentPath === "/about-us" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
-                        onMouseEnter={() => setOpenDropdown('')}
-                    >
-                        About US
-                    </Link>
-                    <Link
-                        to="/blog"
-                        className={`   ${currentPath === "/blog" && !openDropdown ? "text-[#D32F2F] border-b-2 border-[#D32F2F]" : ""} hover:text-[#D32F2F] hover:border-b-2 hover:border-[#D32F2F]`}
-                        onMouseEnter={() => setOpenDropdown('')}
-                    >
-                        Blog
-                    </Link>
-                </div>
             </div>
 
             <button

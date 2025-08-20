@@ -13,26 +13,26 @@ const sliderSettings = {
   infinite: false,
   speed: 500,
   slidesToShow: 4,
-    slidesToScroll: 1,
-    
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 4 },
-      },
-       {
-        breakpoint: 1350,
-        settings: { slidesToShow: 4 },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 1 },
-      },
-      {
-        breakpoint: 480,
-        settings: { slidesToShow: 1 },
-      },
-    ],
+  slidesToScroll: 1,
+
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: { slidesToShow: 4 },
+    },
+    {
+      breakpoint: 1350,
+      settings: { slidesToShow: 4 },
+    },
+    {
+      breakpoint: 768,
+      settings: { slidesToShow: 1 },
+    },
+    {
+      breakpoint: 480,
+      settings: { slidesToShow: 1 },
+    },
+  ],
 };
 
 const PopularProperties = () => {
@@ -66,7 +66,8 @@ const PopularProperties = () => {
     <section className="p-6 text-left ">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold">Popular Owner Properties</h2>
-        <a href={`/category/All-Property`} className="text-red-600 font-semibold hover:underline">
+        <a href="/all-properties"
+          className="text-red-600 font-semibold hover:underline">
           See all Properties →
         </a>
       </div>
@@ -86,7 +87,7 @@ const PopularProperties = () => {
               name: category ? category.category_name : "Uncategorized",
             };
             return (
-              <div key={index}  className="p-4">
+              <div key={index} className="p-4">
                 <PropertyCard {...formattedProp} prop={prop} />
               </div>
             );

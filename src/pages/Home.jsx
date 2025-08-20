@@ -124,7 +124,7 @@ function Home() {
       <TopCities />
       <PopularProperties />
       <ResidentialSlider />
-      <UpcomingProjectsSlider />
+      {/* <UpcomingProjectsSlider /> */}
       {/* <RentingAdviceTabs /> */}
       {/* <SellerCarousel/> */}
       <Footer />
