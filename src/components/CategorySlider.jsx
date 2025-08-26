@@ -18,9 +18,7 @@ const CategorySlider = () => {
     dispatch(fetchCategories());
 
   }, [dispatch]);
-  useEffect(() => {
-    console.log(categories, "categories")
-  }, [categories])
+
   const settings = {
     dots: false,
     infinite: true,
@@ -57,7 +55,9 @@ const CategorySlider = () => {
             <div className="flex flex-col items-center text-center">
               {cat.slug && (
                 <span className="bg-orange-100 text-sm font-semibold text-gray-700 px-3 py-1 rounded-full mb-2">
-                  {cat.slug}
+                  {cat.slug.split("").length > 15
+                    ? cat.slug.split("").slice(0, 15).join("") + "..."
+                    : cat.slug}
                 </span>
               )}
               <div className="flex flex-col items-center">

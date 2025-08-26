@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PiUserCircleDuotone } from 'react-icons/pi';
 import { logoutUser } from '../redux/actions/authActions';
 import { fetchCategories } from '../redux/actions/categoryActions';
-import { FaPhoneAlt, } from "react-icons/fa";
 import Logo from '../assets/footerLogo.png'
+import { getUserProfile } from '../Api/services/authService';
 
 
 const Dropdown = ({ title, items, isOpen, setOpen }) => {
@@ -79,12 +79,29 @@ const Header = () => {
     const auth = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const { user, token } = useSelector((state) => state.auth);
+    const [profileData, setProfileData] = useState(null);
+
     const categories = useSelector((state) => state?.categories?.categories || []);
+    console.log(user, "91749 12108", auth)
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await getUserProfile(token);
+                setProfileData(response.data || response);
+            } catch (err) {
+                console.error('Error fetching profile:', err);
+            }
+        };
+
+        if (token) {
+            fetchProfile();
+        }
+    }, [token]);
     useEffect(() => {
         dispatch(fetchCategories());
 
     }, [dispatch]);
-
+    console.log(profileData, 'profileData')
     const handleLogout = () => {
         if (user && token) {
             dispatch(logoutUser(user.id, token)); // assuming `user.id` exists
@@ -163,38 +180,43 @@ const Header = () => {
                                     <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
                                     <span>Account</span>
                                 </button>
-
                                 <motion.div
                                     initial={{ opacity: 0, height: 0 }}
                                     animate={openDropdown === 'Profile' ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
                                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                                    className="absolute right-0 mt-2 w-40 top-[40px] bg-[#f5f5f5] text-left rounded-lg shadow-lg z-50 overflow-hidden"
+                                    className="absolute right-0 mt-2 w-full min-w-60 top-[40px] bg-[#f5f5f5] text-left rounded-lg shadow-lg z-50 overflow-hidden"
                                 >
-                                    <div className="p-2">
+                                    <div className="p-2 w-full">
                                         <Link
                                             to="/profile"
-                                            className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
+                                            className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4"
                                         >
                                             <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
-                                            <span>{user.name || user.email || user.id}</span>
+                                            <span>{profileData.name}</span>
+                                        </Link>
+
+                                        <Link
+                                            to="/properties-list"
+                                            className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4"
+                                        >
+                                            Manage Properties
                                         </Link>
                                         <Link
                                             to="/properties-list"
-                                            className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4 "
+                                            className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4"
                                         >
-                                            View Properties
-                                        </Link>
+                                            Requested Properties{" "}
 
+                                        </Link>
                                         <button
-                                            onClick={() => {
-                                                handleLogout()
-                                            }}
+                                            onClick={handleLogout}
                                             className="block w-full text-left px-4 py-2 hover:bg-red-50 text-sm text-red-600"
                                         >
                                             Logout
                                         </button>
                                     </div>
                                 </motion.div>
+
                             </div>
                         ) : (
                             <div
@@ -233,30 +255,17 @@ const Header = () => {
                                 >
                                     <div className="p-4">
                                         <h3 className="text-sm font-semibold text-gray-700 border-b pb-2 mb-2">My Activity</h3>
-                                        <ul className="space-y-2 text-sm text-gray-800">
-                                            <li className="flex justify-between items-center hover:underline cursor-pointer">
-                                                Requested Properties <span className="text-xs bg-yellow-400 text-white px-2 py-0.5 rounded-full">NEW</span>
-                                            </li>
-                                            <li className="hover:underline cursor-pointer">View Response</li>
-                                            <li className="hover:underline cursor-pointer">Manage Properties</li>
-                                            <li className="hover:underline cursor-pointer">MagicDiary</li>
-                                            <li className="hover:underline cursor-pointer">Manage Alerts</li>
-                                            <li className="hover:underline cursor-pointer">iAdvantage</li>
-                                        </ul>
-
                                         <Link
                                             to="/login"
                                             className="block w-full mt-6 bg-[#D32F2F] hover:bg-[#B71C1C] text-white py-3 rounded-full text-base font-semibold text-center shadow-md transition-all duration-200"
                                         >
                                             Login
                                         </Link>
-
-
                                         <Link
                                             to="/sign-up"
                                         >
                                             <p className="text-xs text-center mt-2">
-                                                New to Magicbricks? <span className="text-red-600 font-semibold cursor-pointer hover:underline">Sign Up</span>
+                                                New to Reality Wing? <span className="text-red-600 font-semibold cursor-pointer hover:underline">Sign Up</span>
                                             </p>
                                         </Link>
                                     </div>

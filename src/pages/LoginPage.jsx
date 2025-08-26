@@ -11,9 +11,9 @@ function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const {auth ,user} = useSelector(state =>
-   state
-  ); 
+  const { auth, user } = useSelector(state =>
+    state
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -24,20 +24,24 @@ function LoginPage() {
 
     setIsLoading(true);
     setError('');
-    
+
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
 
     try {
-      const response = await userLogin(formData, auth.token);  
+      const response = await userLogin(formData, auth.token);
       console.log('Login success:', response);
-      toast.success('Login Successfully!');
-      if (response && response.JWT) {
-        console.log(response ,"response")
+      if (response && response?.JWT) {
+        toast.success('Login Successfully!');
+
+        console.log(response, "response")
         const { JWT, user_id } = response;
         dispatch(setUser({ JWT, user: { id: user_id } }));
         navigate('/home');
+      }
+      else {
+        response?.result && setError(response?.result);
       }
     } catch (err) {
       setError('Invalid email or password');
@@ -102,11 +106,10 @@ function LoginPage() {
           <button
             onClick={handleLogin}
             disabled={isLoading}
-            className={`w-full font-medium py-2 rounded-md transition-all flex items-center justify-center ${
-              isLoading 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-red-500 hover:bg-red-600 text-white'
-            }`}
+            className={`w-full font-medium py-2 rounded-md transition-all flex items-center justify-center ${isLoading
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-red-500 hover:bg-red-600 text-white'
+              }`}
           >
             {isLoading ? (
               <>
