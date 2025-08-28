@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css';
@@ -22,18 +22,34 @@ import Profile from './pages/Profile';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResidentialDetail from './components/ResidentialDetail';
 import AllPropertiesPage from './pages/AllPropertiesPage';
-
-// ✅ Import WhatsApp icon
 import { FaWhatsapp } from 'react-icons/fa';
 
 function App() {
-  // Replace with your WhatsApp number (with country code, without + or spaces)
-  const whatsappNumber = "919174912108"; // Example: India number
+  const whatsappNumber = "919174912108"; // Your WhatsApp number
+  const [showWhatsApp, setShowWhatsApp] = useState(false);
 
   const handleWhatsAppClick = () => {
     const url = `https://wa.me/${whatsappNumber}`;
     window.open(url, "_blank");
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const fullHeight = document.documentElement.scrollHeight;
+
+      // If user is within 200px from bottom, show button
+      if (scrollTop + windowHeight >= fullHeight - 500) {
+        setShowWhatsApp(true);
+      } else {
+        setShowWhatsApp(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <BrowserRouter>
@@ -64,13 +80,15 @@ function App() {
           </Routes>
         </div>
 
-        {/* ✅ Floating WhatsApp Button */}
-        <button
-          onClick={handleWhatsAppClick}
-          className="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center z-50 transition-transform transform hover:scale-110"
-        >
-          <FaWhatsapp size={30} />
-        </button>
+        {/* ✅ WhatsApp button appears only near bottom */}
+        {showWhatsApp && (
+          <button
+            onClick={handleWhatsAppClick}
+            className="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center z-50 transition-transform transform hover:scale-110"
+          >
+            <FaWhatsapp size={30} />
+          </button>
+        )}
       </div>
     </BrowserRouter>
   );

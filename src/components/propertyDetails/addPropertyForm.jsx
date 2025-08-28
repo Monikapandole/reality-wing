@@ -5,7 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { TextField, Select, MenuItem, Button, Typography, Box, InputLabel, FormControl } from "@mui/material";
 import StepIndicator from "../common/StepIndicator";
 import ImageUploader from "../common/ImageUploader";
-import { addProperty, updateProperty } from "../../redux/Slice/propertySlice";
+import { addPropertyAsync, updatePropertyAsync, clearError, clearSuccess } from "../../redux/Slice/propertySlice";
+import { toast } from "react-toastify";
 
 const AddPropertyForm = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,10 @@ const AddPropertyForm = () => {
     const existingProperty = useSelector((state) =>
         state.property.properties.find((p) => p.id === Number(id))
     );
+
+    const { loading, error, success } = useSelector((state) => state.property);
+    const { token } = useSelector((state) => state.auth);
+
 
     const [form, setForm] = useState({
         mobile: "",
@@ -47,6 +52,25 @@ const AddPropertyForm = () => {
             setForm(existingProperty);
         }
     }, [isEditMode, existingProperty]);
+
+    // Clear error and success states when component unmounts or when navigating
+    useEffect(() => {
+        return () => {
+            dispatch(clearError());
+            dispatch(clearSuccess());
+        };
+    }, [dispatch]);
+
+    // Auto-navigate after successful submission
+    useEffect(() => {
+        if (success) {
+            const timer = setTimeout(() => {
+                navigate("/properties-list");
+            }, 2000); // Wait 2 seconds to show success message
+
+            return () => clearTimeout(timer);
+        }
+    }, [success, navigate]);
 
     // Validation per step
     const validateStep = () => {
@@ -117,7 +141,7 @@ const AddPropertyForm = () => {
             setPreviewUrl(null);
         }
     }, [form.bathroomImage]);
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const allErrors = {};
         // Validate all steps on submit:
@@ -131,12 +155,25 @@ const AddPropertyForm = () => {
             return;
         }
 
-        if (isEditMode) {
-            dispatch(updateProperty({ id, data: form }));
-        } else {
-            dispatch(addProperty(form));
+        // Additional validation for required fields
+        console.log(form, "form the test")
+        if (!form.mobile || !form.owner || !form.address || !form.rooms || !form.sqft || !form.price) {
+            toast.error("Please fill in all required fields");
+            return;
         }
-        navigate("/properties-list");
+
+        try {
+            if (isEditMode) {
+                await dispatch(updatePropertyAsync({ id, data: form, token })).unwrap();
+                toast.success("Property updated successfully!");
+            } else {
+                await dispatch(addPropertyAsync(form, token)).unwrap();
+                toast.success("Property added successfully!");
+            }
+        } catch (error) {
+            console.error('Failed to submit property:', error);
+            // Error handling is done in the Redux slice
+        }
     };
     console.log(form.bathroomImage instanceof File); // should be true
 
@@ -148,6 +185,12 @@ const AddPropertyForm = () => {
             <Typography variant="h4" mb={3}>
                 {isEditMode ? "Edit Property Details" : "Add Property Details"}
             </Typography>
+
+            {loading && (
+                <div className="text-blue-600 text-center mb-4 p-3 bg-blue-50 rounded-lg">
+                    {isEditMode ? "Updating property..." : "Adding property..."}
+                </div>
+            )}
             <StepIndicator currentStep={step} />
 
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
@@ -479,7 +522,11 @@ const AddPropertyForm = () => {
                         <button
                             type="button"
                             onClick={handleBack}
-                            className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+                            disabled={loading}
+                            className={`px-4 py-2 rounded ${loading
+                                ? 'bg-gray-200 cursor-not-allowed'
+                                : 'bg-gray-300 hover:bg-gray-400'
+                                } text-gray-700`}
                         >
                             Back
                         </button>
@@ -488,18 +535,40 @@ const AddPropertyForm = () => {
                         <button
                             type="button"
                             onClick={handleNext}
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-auto"
+                            disabled={loading}
+                            className={`px-4 py-2 rounded ml-auto ${loading
+                                ? 'bg-gray-400 cursor-not-allowed'
+                                : 'bg-blue-500 hover:bg-blue-600'
+                                } text-white`}
                         >
-                            Next
+                            {loading ? 'Processing...' : 'Next'}
                         </button>
                     )}
                     {step === 3 && (
-                        <button
-                            type="submit"
-                            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 ml-auto"
-                        >
-                            {isEditMode ? "Update Property" : "Submit Property"}
-                        </button>
+                        <>
+                            {error && (
+                                <div className="text-red-500 text-sm mb-2 p-3 bg-red-50 rounded-lg">
+                                    <div className="font-medium">Error:</div>
+                                    <div>{typeof error === 'string' ? error : 'An error occurred while submitting the property'}</div>
+                                    <button
+                                        onClick={() => dispatch(clearError())}
+                                        className="text-red-600 underline mt-1 hover:text-red-800"
+                                    >
+                                        Dismiss
+                                    </button>
+                                </div>
+                            )}
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className={`px-4 py-2 rounded ml-auto ${loading
+                                    ? 'bg-gray-400 cursor-not-allowed'
+                                    : 'bg-green-500 hover:bg-green-600'
+                                    } text-white`}
+                            >
+                                {loading ? 'Submitting...' : (isEditMode ? "Update Property" : "Submit Property")}
+                            </button>
+                        </>
                     )}
                 </div>
             </form>

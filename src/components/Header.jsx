@@ -192,7 +192,7 @@ const Header = () => {
                                             className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-800 flex gap-4"
                                         >
                                             <PiUserCircleDuotone className="w-6 h-6 text-gray-700" />
-                                            <span>{profileData.name}</span>
+                                            <span>{profileData?.name || "My Profile"}</span>
                                         </Link>
 
                                         <Link
