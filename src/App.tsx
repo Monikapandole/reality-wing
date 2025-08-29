@@ -29,9 +29,18 @@ function App() {
   const [showWhatsApp, setShowWhatsApp] = useState(false);
 
   const handleWhatsAppClick = () => {
-    const url = `https://wa.me/${whatsappNumber}`;
+    const whatsappNumber = "919174912108";
+
+    // Detect if user is on mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    const url = isMobile
+      ? `https://wa.me/${whatsappNumber}` // Mobile app
+      : `https://web.whatsapp.com/send?phone=${whatsappNumber}`; // Desktop web
+
     window.open(url, "_blank");
   };
+
 
   useEffect(() => {
     const handleScroll = () => {
